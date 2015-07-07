@@ -35,3 +35,6 @@ class MyClass(object):
 
 def add_by(x):
     return lambda y:y+x
+
+for i in range(50):
+    print (i**i)
