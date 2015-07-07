@@ -7,7 +7,7 @@ import unittest
 class MI_reports(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome("C:/Users/StefanFlorescu/PycharmProjects/HomespunAutomation/chromedriver.exe")
         self.driver.implicitly_wait(30)
         self.base_url = "http://letrisks-acumen.com/"
         self.driver.get(self.base_url + "?request=restart")
