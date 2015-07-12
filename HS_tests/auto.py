@@ -1,5 +1,14 @@
 __author__ = 'StefanFlorescu'
 
-from  selenium import webdriver
+from  Automatisation.pages import LoginPage
+import unittest
 
-class Web ()
+class LOG (unittest.TestCase):
+
+    def test_LoginProcedure(self):
+        LoginPage.GoTo()
+        LoginPage.AgLogin()
+
+if __name__ == '__main__':
+    unittest.main()
+
