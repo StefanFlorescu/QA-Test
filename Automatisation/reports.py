@@ -145,7 +145,7 @@ class MI_reports(unittest.TestCase):
         driver = self.driver
         driver.find_element_by_link_text("MI").click()
         driver.find_element_by_partial_link_text("TAT by reference type").click()
-        self.assertIn("TAT by reference type", driver.title)
+        self.assertIn("TAT by reference", driver.title)
         driver.find_element_by_name("sdate").click()
         driver.implicitly_wait(1000)
         driver.find_element_by_link_text("1").click()
@@ -187,7 +187,7 @@ class MI_reports(unittest.TestCase):
         driver = self.driver
         driver.find_element_by_link_text("MI").click()
         driver.find_element_by_partial_link_text("LR Actions Report").click()
-        self.assertIn("LR Actions Report", driver.title)
+        self.assertIn("LR", driver.title)
         driver.find_element_by_name("sdate").click()
         driver.implicitly_wait(1000)
         driver.find_element_by_link_text("1").click()

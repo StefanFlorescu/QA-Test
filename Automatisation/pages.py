@@ -1,6 +1,6 @@
 __author__ = 'Steve'
 
-from Automatisation.browser import Browser
+from Automatisation.BasePage import Browser
 
 class LoginPage(object):
 
