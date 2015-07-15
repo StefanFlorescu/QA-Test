@@ -4,16 +4,19 @@ import random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support.ui import WebDriverWait
+import time
+import random
+
 
 
 class BasePage(object):
     def __init__(self):
-        self.driver = webdriver.Chrome("C:/Users/StefanFlorescu/PycharmProjects/HomespunAutomation/chromedriver.exe")
-        self.base_url = 'http://homespun.lan'
+        self.driver = webdriver.Firefox()
+        self.base_url = 'http://letrisks-acumen.com'
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
-        self.start_month = 0
+        self.start_month = 6
         self.end_month = 7
         self.startday = 1
         self.endday = 27
@@ -36,7 +39,7 @@ class BasePage(object):
         self.driver.find_element_by_name("loginbutton").click()
 
     def op_login(self):
-        self.GoTo()
+        self.go()
         self.driver.find_element_by_id("text-password").clear()
         self.driver.find_element_by_id("text-password").send_keys("testingsitesqa@hotmail.com")
         self.driver.find_element_by_name("password").clear()
@@ -60,7 +63,7 @@ class BasePage(object):
         self.driver.find_element_by_link_text("List Applications").click()
 
     def filter_byaddress(self, tenancy_address):
-        self.ListApp()
+        self.list_apps()
         filter = self.driver
         filter.find_element_by_name("filter[address]").send_keys(tenancy_address + Keys.ENTER)
 
@@ -88,7 +91,6 @@ class BasePage(object):
         datepicker = self.driver.find_element_by_id("ui-datepicker-div")
         datepicker.find_element_by_link_text(str(self.startday)).click()
 
-
     def close(self):
         self.driver.close()
 
@@ -99,3 +101,24 @@ class BasePage(object):
     @property
     def webdriver(self):
         return self.driver
+
+    @staticmethod
+    def wait(period=2):
+        time.sleep(period)
+
+    def set_randomoption(self, name_attribute):
+        driver = self.driver
+        options = driver.find_element_by_name(str(name_attribute))
+        select = Select(driver.find_element_by_name(str(name_attribute)))
+        select.select_by_index(
+            random.randint(1, len(options.find_elements_by_tag_name("option"))))
+
+    def select_all(self, name_attribute):
+        driver = self.driver
+        elem = driver.find_element_by_name(str(name_attribute))
+        options = elem.find_elements_by_tag_name("option")
+        for option in options:
+            option.click()
+
+    def trigger_filter(self):
+        self.driver.find_element_by_xpath('//input[@value="Filter"]').click()

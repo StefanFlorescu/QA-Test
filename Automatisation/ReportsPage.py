@@ -1,10 +1,22 @@
-
 from Automatisation.BasePage import BasePage
+
+
+
 
 class CreatePage(BasePage):
     pass
 
+
 class StatReports(BasePage):
+
+    def test_ReferenceDirectory(self):
+        driver = self.driver
+        driver.find_element_by_partial_link_text('Reference').click()
+        driver.find_element_by_link_text('Reference directory').click()
+        assert "directory" in driver.title
+        BasePage.set_randomoption(self, 'filter[IncomeType]')
+        self.trigger_filter()
+        self.wait()
 
     def test_CSVreport(self):
         driver = self.driver
@@ -13,6 +25,7 @@ class StatReports(BasePage):
         assert "CSV Report" in driver.title
         BasePage.set_date(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
     def test_OverallTAT(self):
         driver = self.driver
@@ -22,6 +35,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_LandlordReport(self):
@@ -32,6 +46,21 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
+
+    def test_ActiveTasks(self):
+        driver = self.driver
+        driver.find_element_by_link_text("MI").click()
+        driver.find_element_by_partial_link_text("Active Tasks ").click()
+        assert "Active Tasks" in driver.title
+        BasePage.set_startdate(self)
+        BasePage.set_enddate(self)
+        self.set_randomoption("customer")
+        self.wait()
+        self.select_all("branches[]")
+        driver.find_element_by_name("build").click()
+        self.wait()
+
 
 
     def test_ReferenceVolumes(self):
@@ -42,7 +71,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
-
+        self.wait()
 
 
     def test_ReferenceDecisions(self):
@@ -53,6 +82,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_RefereeResponse(self):
@@ -63,6 +93,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_IncomingCommunications(self):
@@ -73,9 +104,10 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
-    def test_EquifaxData(self):
+    def test_EquifaxDataSearch(self):
         driver = self.driver
         driver.find_element_by_link_text("MI").click()
         driver.find_element_by_partial_link_text("Equifax data").click()
@@ -83,7 +115,30 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
+    def test_TenantsAccepts(self):
+        driver = self.driver
+        driver.find_element_by_link_text("MI").click()
+        driver.find_element_by_partial_link_text("Tenants Accepts").click()
+        assert "Daily Tenants" in driver.title
+        BasePage.set_startdate(self)
+        BasePage.set_enddate(self)
+        driver.find_element_by_name("build").click()
+        self.wait()
+
+    def test_TenantProfile(self):
+        driver = self.driver
+        driver.find_element_by_link_text("MI").click()
+        driver.find_element_by_partial_link_text("Tenant Profile").click()
+        assert "Tenant Profile" in driver.title
+        BasePage.set_startdate(self)
+        BasePage.set_enddate(self)
+        self.set_randomoption("customer")
+        self.wait()
+        self.select_all("branches[]")
+        driver.find_element_by_name("build").click()
+        self.wait()
 
     def test_UserActivity(self):
         driver = self.driver
@@ -93,6 +148,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_TATbyReference(self):
@@ -103,6 +159,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_ActiveApplicants(self):
@@ -113,6 +170,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
 
 
     def test_ActiveApplicants(self):
@@ -123,17 +181,7 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
-
-
-    def test_ActiveApplicants(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("LR Actions").click()
-        assert "LR" in driver.title
-        BasePage.set_startdate(self)
-        BasePage.set_enddate(self)
-        driver.find_element_by_name("build").click()
-        driver.implicitly_wait(5)
+        self.wait()
 
 
     def test_LeadGeneration(self):
@@ -144,6 +192,30 @@ class StatReports(BasePage):
         BasePage.set_startdate(self)
         BasePage.set_enddate(self)
         driver.find_element_by_name("build").click()
+        self.wait()
+
+    def test_ReferenceTurnaround(self):
+        driver = self.driver
+        driver.find_element_by_link_text("MI").click()
+        driver.find_element_by_partial_link_text("Reference Turnaround").click()
+        assert "Reference Turnaround" in driver.title
+        BasePage.set_startdate(self)
+        BasePage.set_enddate(self)
+        self.set_randomoption("customer")
+        self.wait()
+        self.select_all("RMethod[]")
+        driver.find_element_by_name("build").click()
+        self.wait()
+
+    def test_ActionsReport(self):
+        driver = self.driver
+        driver.find_element_by_link_text("MI").click()
+        driver.find_element_by_partial_link_text("LR Actions").click()
+        assert "LR Actions" in driver.title
+        BasePage.set_startdate(self)
+        BasePage.set_enddate(self)
+        driver.find_element_by_name("build").click()
+        self.wait()
 
 
 

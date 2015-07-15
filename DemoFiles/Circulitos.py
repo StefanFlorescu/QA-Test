@@ -9,8 +9,8 @@ class Circle(object):
     version = "0.1"  # this is a class variable - all the instances of this class share this variable
 
     def __init__(self, radius):
-        self.radius = radius  # this is the "initializer function" that initiates the instance (class) variables
-        # that can be used further in the class by invocation syntax "self.{variable_name}"
+        self.radius = radius  # this is the "initializer function" that initiates the instance object of the class
+        # - variables that can be used further in the class by invocation syntax "self.{variable_name}"
 
     @property
     def area(self):
@@ -24,8 +24,8 @@ class Circle(object):
     def from_bbd(cls, bbd):  # alternative constructor
         """"Construct a circle from a bounding box diagonal - this is a constructor method"""
         radius = bbd / 2.0 / math.sqrt(2.0)
-        return cls(radius)  # for a single class "return Circle(radius" works fine,
-        # but for subclassing only "retirn cls(radius)" is appropriate
+        return cls(radius)  # for a single class "return Circle(radius) works fine,
+        # but for subclassing only "return cls(radius)" is appropriate
 
     @staticmethod
     def angle_to_grades(angle): # the staticmethod decorator attaches a function to the class tha uses no class name
