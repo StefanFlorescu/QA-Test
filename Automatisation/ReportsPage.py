@@ -1,10 +1,7 @@
 from Automatisation.BasePage import BasePage
 
-
-
-
 class CreatePage(BasePage):
-
+    pass
 
 
 class StatReports(BasePage):

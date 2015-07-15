@@ -12,7 +12,7 @@ import random
 
 class BasePage(object):
     def __init__(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.base_url = 'http://letrisks-acumen.com'
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
