@@ -1,7 +1,8 @@
 __author__ = 'StefanFlorescu'
 
-from Automatisation.ReportsPage import StatReports
 import unittest
+
+from Automatisation.ReportsPage import StatReports
 
 
 class ReportTests(unittest.TestCase):
@@ -32,8 +33,14 @@ class ReportTests(unittest.TestCase):
         reports.test_ActiveApplicants()
         reports.test_ActionsReport()
         reports.test_LeadGeneration()
+        reports.close()
 
-        # reports.close()
+    def test_RefDir(self):
+        reports = StatReports()
+        reports.go()
+        reports.mg_login()
+        reports.test_ReferenceDirectory()
+        reports.close()
 
     def tearDown(self):
         pass

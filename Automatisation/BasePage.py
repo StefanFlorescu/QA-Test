@@ -18,7 +18,7 @@ class BasePage(object):
         self.driver.maximize_window()
         self.start_month = 6
         self.end_month = 7
-        self.startday = 1
+        self.startday = 16
         self.endday = 27
 
     def go(self):
