@@ -5,17 +5,17 @@ import random
 
 
 class User(object):
-    def __init__(self, ccj_value=False, phone_value=False):
+    def __init__(self, report=1, ccj_value=False, phone_value=False, ):
 
         def user_index():
             """ func that returns the index of the object that meets the initializator variable values(requirements)
             :return: int
             """
             while True:
-                index = random.randint(0, mass.__len__() - 1)
+                index = random.randint(0, (mass.__len__() - 1))
                 if mass[index]["ccj"] == ccj_value and mass[index]["phone"] == phone_value:
                     break
-                return index
+            return index
 
         self.selector = user_index()
         self.name = mass[self.selector]["name"][0]
@@ -30,7 +30,17 @@ class User(object):
         self.sex = mass[self.selector]["details"][1]
         self.origin = mass[self.selector]["details"][2]
         self.status = mass[self.selector]["details"][3]
+        self.report_type = report
+        self.payinginadvance = True
+        self.hasemail = False
+        self.incomeverification_required = True
+        self.rentshare = None
 
 
+    @report_type.setter
+    def report_type(self, value):
+        self._report_type = value
+
+if __name__ == '__main__':
 x = User()
-print(x.__dict__ )
+print(x.__dict__)

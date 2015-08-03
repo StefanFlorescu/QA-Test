@@ -12,7 +12,7 @@ import random
 
 class BasePage(object):
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         self.base_url = 'http://letrisks-acumen.com'
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
@@ -30,6 +30,7 @@ class BasePage(object):
         self.driver.find_element_by_name("password").clear()
         self.driver.find_element_by_name("password").send_keys("123456")
         self.driver.find_element_by_name("loginbutton").click()
+
 
     def mg_login(self):
         self.driver.find_element_by_id("text-password").clear()
