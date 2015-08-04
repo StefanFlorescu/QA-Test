@@ -16,13 +16,20 @@ class BasePage(object):
         self.base_url = 'http://letrisks-acumen.com'
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
-        self.start_month = 6
-        self.end_month = 7
-        self.startday = 16
-        self.endday = 27
+        self.start_month = 8
+        self.end_month = 8
+        self.startday = 04
+        self.endday = 06
 
     def go(self):
         self.driver.get(self.base_url + '/?request=restart')
+
+    def login(self, username = "testinginbox@yahoo.com", password = 123456):
+        self.driver.find_element_by_id("text-password").clear()
+        self.driver.find_element_by_id("text-password").send_keys(username)
+        self.driver.find_element_by_name("password").clear()
+        self.driver.find_element_by_name("password").send_keys(password)
+        self.driver.find_element_by_name("loginbutton").click()
 
     def ag_login(self):
         self.driver.find_element_by_id("text-password").clear()
