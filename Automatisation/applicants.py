@@ -1,7 +1,6 @@
 __author__ = 'StefanFlorescu'
 
 mass = [
-
     {"name": ['RAYMOND ', 'SMITH ', '01/11/1945'], "address": ['3 ', '', ''], "bank": ['56-00-36', '57607230'],
      "details": ["Mr", "Male", "British", "Married"], "ccj": False, "phone": True},
     {"name": ['ROGER ', 'HAYNE ', '01/11/1951'], "address": ['5 ', '', ''], "bank": ['56-00-36', '57607230'],
@@ -131,7 +130,6 @@ mass = [
      "bank": ['56-00-36', '57607230'], "details": ["Mrs", "Female", "British", "Married"], "ccj": False, "phone": True},
     {"name": ["STEPHEN", "STOMER", "01/01/1960"], "address": ["FLATTS", "Tree Tops", ""],
      "bank": ['56-00-36', '57607230'], "details": ["Mr", "Male", "British", "Married"], "ccj": False, "phone": False}
-
 ]
 
 import random
@@ -165,15 +163,15 @@ class User(object):
         self.origin = mass[self.selector]["details"][2]
         self.status = mass[self.selector]["details"][3]
         self.report_type = report
-        self.payinginadvance = True
-        self.hasemail = False
+        self.payinginadvance = False
+        self.hasemail = True
         self.incomeverification_required = True
         self.rentshare = None
 
 
     @report_type.setter
-    def report_type(self, value):
-        self._report_type = value
+    def set_report_type(self, value):
+        self.report_type = value
 
 
 if __name__ == '__main__':
