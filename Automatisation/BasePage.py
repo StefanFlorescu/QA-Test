@@ -1,12 +1,12 @@
 __author__ = 'StefanFlorescu'
 
-import random
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 # from selenium.webdriver.support.ui import WebDriverWait
 import time
 import random
+from Automatisation import users
 
 
 
@@ -21,14 +21,20 @@ class BasePage(object):
         self.startday = 04
         self.endday = 06
 
+
     def go(self):
         self.driver.get(self.base_url + '/?request=restart')
 
-    def login(self, username = "testinginbox@yahoo.com", password = 123456):
+    def set_users(self, user= "agent", customer = "Draytus"):
+       # global currentUser
+        self.currentUser= users.User(customer, user)
+
+    def login(self):
+
         self.driver.find_element_by_id("text-password").clear()
-        self.driver.find_element_by_id("text-password").send_keys(username)
+        self.driver.find_element_by_id("text-password").send_keys(self.currentUser.username)
         self.driver.find_element_by_name("password").clear()
-        self.driver.find_element_by_name("password").send_keys(password)
+        self.driver.find_element_by_name("password").send_keys(self.currentUser.password)
         self.driver.find_element_by_name("loginbutton").click()
 
     def ag_login(self):
