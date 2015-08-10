@@ -168,8 +168,6 @@ class User(object):
         self.incomeverification_required = True
         self.rentshare = None
 
-
-    @report_type.setter
     def set_report_type(self, value):
         self.report_type = value
 

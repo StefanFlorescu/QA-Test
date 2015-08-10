@@ -20,15 +20,9 @@ class User(object):
     def __init__(self, customer="Draytus", role="agent"):
         self.customer = customer
         self.role = role
-
-    def set_name(self):
-        self.name = user_pool[self.customer][self.role][0]
-
-    def set_email(self):
+        self.full_name = user_pool[self.customer][self.role][0]
         self.email = user_pool[self.customer][self.role][1]
-
-    def set_pass(self):
-        self.password = user_pool[self.customer][self.role][2]
+        self.password_str = user_pool[self.customer][self.role][2]
 
     @property
     def username(self):
@@ -36,8 +30,8 @@ class User(object):
 
     @property
     def password(self):
-        return self.password
+        return self.password_str
 
     @property
     def name(self):
-        return self.name
+        return self.full_name

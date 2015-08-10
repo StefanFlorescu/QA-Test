@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import Select
 # from selenium.webdriver.support.ui import WebDriverWait
 import time
 import random
-from Automatisation import users
+
 
 
 
@@ -25,9 +25,9 @@ class BasePage(object):
     def go(self):
         self.driver.get(self.base_url + '/?request=restart')
 
-    def set_users(self, user= "agent", customer = "Draytus"):
-       # global currentUser
-        self.currentUser= users.User(customer, user)
+    # def set_users(self, user= "agent", customer = "Draytus"):
+    #    # global currentUser
+    #     self.currentUser= users.User(customer, user)
 
     def login(self):
 
@@ -86,7 +86,7 @@ class BasePage(object):
         address.find_element_by_name("PostCode").clear()
         address.find_element_by_name("PostCode").send_keys(postcode + Keys.TAB + Keys.ENTER)
         address_list = address.find_elements_by_class_name("address_item")
-        return type(address_list)
+        address_list[random.randint(0, address_list.__len__()-1)].click()
 
     def set_startdate(self):
         self.driver.find_element_by_name('sdate').click()
@@ -133,6 +133,19 @@ class BasePage(object):
         options = elem.find_elements_by_tag_name("option")
         for option in options:
             option.click()
+
+
+    def select_option_byname(self, select_id, select_option):
+        driver = self.driver
+        select = Select(driver.find_element_by_name(select_id))
+        select.select_by_visible_text(select_option)
+
+    def select_option_byngmodel(self, select_id, select_option):
+        driver = self.driver
+        Select(driver.find_element_by_xpath("(//select[@ng-model=\""+select_id+"\"])")).\
+            select_by_visible_text(select_option)
+
+
 
     def trigger_filter(self):
         self.driver.find_element_by_xpath('//input[@value="Filter"]').click()
