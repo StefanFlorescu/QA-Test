@@ -4,7 +4,7 @@ __author__ = 'StefanFlorescu'
 
 class ApplicationPage(BasePage):
 
-    def set_branch(self, branch = "None"):
+    def set_branch(self, branch = "Letrisks"):
         self.select_option_byname("BranchId", branch)
 
     def set_agent(self, agent_name = "QA Test"):
@@ -13,11 +13,11 @@ class ApplicationPage(BasePage):
     def set_property(self, postcode = "IV44 8TZ"):
         self.random_address(postcode)
 
-    def set_rental_details(self, rent, term, start_date = "31/08/2015"):
+    def set_rental_details(self, rent=1000, term=12, start_date = "31/08/2015"):
         driver = self.driver
         rent = driver.find_element_by_id("ShareOfMonthlyRent")
         rent.clear()
-        # rent.send_keys(rent)
+        rent.send_keys(str(rent))
         driver.find_element_by_id("TenancyTerm").send_keys(term)
         driver.find_element_by_name("TenancyStartDate").send_keys(start_date)
 
@@ -31,6 +31,17 @@ class ApplicationPage(BasePage):
         driver.find_element_by_xpath("//input[@ng-model='applicant.ShareOfRent.Value']").send_keys(rent_share)
         driver.find_element_by_xpath("//input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
         self.select_option_byngmodel("applicant.ApplicantPayingInAdvance.Value", "No")
+
+    def set_guarantor(self, tenant, title, first_name, surename, report_type,):
+        driver = self.driver
+        driver.find_element_by_xpath("//input[@value='Add Guarantor']").click()
+        # self.select_option_byngmodel("applicant.Applicants", tenant)
+        self.select_option_byngmodel("applicant.Title.Value", title, 2)
+        driver.find_element_by_xpath("//input[@ng-model='applicant.FirstName']")[2].send_keys(first_name)
+        driver.find_element_by_xpath("//input[@ng-model='applicant.Surname']")[2].send_keys(surename)
+        driver.find_element_by_xpath("//input[contains(@type, 'radio') and contains(@ng-value, 'false')]")[2].click()
+
+
 
 
 

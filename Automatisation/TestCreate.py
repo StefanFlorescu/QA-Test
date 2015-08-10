@@ -15,11 +15,11 @@ class ReportTests(unittest.TestCase):
         create.ag_login()
         create.create_app()
         create.wait(4)
-        create.set_branch()
+        create.set_branch("LetRisks")
         create.set_property()
         create.set_rental_details(2000, 12)
-        for i in (1, 2):
-            create.set_tenant("Mr", "Test1", "Draytus", "Comprehensive", "1000")
+        create.set_tenant("Mr", "Test1", "Draytus", "Comprehensive", "1000")
+        create.set_guarantor("Test1 Draytus","Mrs", "Test2", "Draytus", "Instant")
 
 
     def tearDown(self):

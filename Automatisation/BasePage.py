@@ -13,7 +13,7 @@ import random
 class BasePage(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
-        self.base_url = 'http://letrisks-acumen.com'
+        self.base_url = 'http://sandbox.letrisks-acumen.com'
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         self.start_month = 8
@@ -140,9 +140,9 @@ class BasePage(object):
         select = Select(driver.find_element_by_name(select_id))
         select.select_by_visible_text(select_option)
 
-    def select_option_byngmodel(self, select_id, select_option):
+    def select_option_byngmodel(self, select_id, select_option, step= 1):
         driver = self.driver
-        Select(driver.find_element_by_xpath("(//select[@ng-model=\""+select_id+"\"])")).\
+        Select(driver.find_element_by_xpath("(//select[@ng-model=\""+select_id+"\"])")[1].\
             select_by_visible_text(select_option)
 
 
