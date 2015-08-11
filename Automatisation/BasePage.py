@@ -20,6 +20,11 @@ class BasePage(object):
         self.end_month = 8
         self.startday = 04
         self.endday = 06
+        if self.base_url.__contains__("letrisks-acumen"):
+            self.postcode = "IV44 8TZ"
+        else:
+            self.postcode = "BA133BN"
+
 
 
     def go(self):
@@ -81,7 +86,7 @@ class BasePage(object):
         filter = self.driver
         filter.find_element_by_name("filter[address]").send_keys(tenancy_address + Keys.ENTER)
 
-    def random_address(self, postcode):
+    def set_random_address(self, postcode):
         address = self.driver
         address.find_element_by_name("PostCode").clear()
         address.find_element_by_name("PostCode").send_keys(postcode + Keys.TAB + Keys.ENTER)
@@ -137,15 +142,15 @@ class BasePage(object):
 
     def select_option_byname(self, select_id, select_option):
         driver = self.driver
-        select = Select(driver.find_element_by_name(select_id))
-        select.select_by_visible_text(select_option)
+        Select(driver.find_element_by_name(select_id)).select_by_visible_text(select_option)
 
-    def select_option_byngmodel(self, select_id, select_option, step= 1):
+    def select_option_byid(self, select_id, select_option):
         driver = self.driver
-        Select(driver.find_element_by_xpath("(//select[@ng-model=\""+select_id+"\"])")[1].\
-            select_by_visible_text(select_option)
+        Select(driver.find_element_by_id(select_id)).select_by_visible_text(select_option)
 
-
+    def select_optionbyxpath(self, select_id, select_option):
+        driver = self.driver
+        Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(select_option)
 
     def trigger_filter(self):
         self.driver.find_element_by_xpath('//input[@value="Filter"]').click()

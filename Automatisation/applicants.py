@@ -135,8 +135,8 @@ mass = [
 import random
 
 
-class User(object):
-    def __init__(self, report=1, ccj_value=False, phone_value=False, ):
+class Applicant(object):
+    def __init__(self, report="Comprehensive", ccj_value=False, phone_value=False, ):
 
         def user_index():
             """ func that returns the index of the object that meets the initializator variable values(requirements)
@@ -166,12 +166,12 @@ class User(object):
         self.payinginadvance = False
         self.hasemail = True
         self.incomeverification_required = True
-        self.rentshare = None
+        self.rentshare = 1000
 
     def set_report_type(self, value):
         self.report_type = value
 
 
-if __name__ == '__main__':
-    x = User()
-print(x.__dict__)
+# if __name__ == '__main__':
+#     x = User()
+# print(x.__dict__)

@@ -10,38 +10,44 @@ class ApplicationPage(BasePage):
     def set_agent(self, agent_name = "QA Test"):
         self.select_option_byname("AgentId", agent_name)
 
-    def set_property(self, postcode = "IV44 8TZ"):
-        self.random_address(postcode)
+    def set_property(self):
+        self.set_random_address(self.postcode)
+
+    def get_property(self):
+        pass
+
 
     def set_rental_details(self, rent=1000, term=12, start_date = "31/08/2015"):
         driver = self.driver
-        rent = driver.find_element_by_id("ShareOfMonthlyRent")
-        rent.clear()
-        rent.send_keys(str(rent))
+        rent_field = driver.find_element_by_id("ShareOfMonthlyRent")
+        rent_field.clear()
+        rent_field.send_keys(str(rent))
         driver.find_element_by_id("TenancyTerm").send_keys(term)
         driver.find_element_by_name("TenancyStartDate").send_keys(start_date)
 
 
-    def set_tenant(self, title, first_name, surename, report_type, rent_share):
+    def set_tenant(self, title = "Mr", first_name = "Tenant", surename = "Draytus", report_type = "Comprehensive", rent_share = 1000, order = 1):
         driver = self.driver
         driver.find_element_by_xpath("//input[@value='Add Tenant']").click()
-        self.select_option_byngmodel("applicant.Title.Value", title)
-        driver.find_element_by_xpath("//input[@ng-model='applicant.FirstName']").send_keys(first_name)
-        driver.find_element_by_xpath("//input[@ng-model='applicant.Surname']").send_keys(surename)
-        driver.find_element_by_xpath("//input[@ng-model='applicant.ShareOfRent.Value']").send_keys(rent_share)
-        driver.find_element_by_xpath("//input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
-        self.select_option_byngmodel("applicant.ApplicantPayingInAdvance.Value", "No")
+        tenant_block = "//div[@id='tenantContainer']/div[contains(@ng-repeat,'filter:{IsGuarantor:false}')][%s]/descendant::"%order
+        self.select_optionbyxpath(tenant_block + "select[@name='Title[]']", title)
+        driver.find_element_by_xpath(tenant_block+"input[@ng-model='applicant.FirstName']").send_keys(first_name)
+        driver.find_element_by_xpath(tenant_block+"input[@ng-model='applicant.Surname']").send_keys(surename)
+        rent_field = driver.find_element_by_xpath(tenant_block+"input[@ng-model='applicant.ShareOfRent.Value']")
+        rent_field.clear()
+        rent_field.send_keys(rent_share)
+        self.select_optionbyxpath(tenant_block+"select[@ng-model='applicant.ReportType.Value']", report_type)
+        driver.find_element_by_xpath(tenant_block+"input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
+        self.select_optionbyxpath(tenant_block+"select[@ng-model='applicant.ApplicantPayingInAdvance.Value']", "No")
 
-    def set_guarantor(self, tenant, title, first_name, surename, report_type,):
+
+    def set_guarantor(self, title = "Mr", first_name = "Guarantor", surename = "Draytus", report_type = "Comprehensive", rent_share = 1000, order = 1):
         driver = self.driver
         driver.find_element_by_xpath("//input[@value='Add Guarantor']").click()
-        # self.select_option_byngmodel("applicant.Applicants", tenant)
-        self.select_option_byngmodel("applicant.Title.Value", title, 2)
-        driver.find_element_by_xpath("//input[@ng-model='applicant.FirstName']")[2].send_keys(first_name)
-        driver.find_element_by_xpath("//input[@ng-model='applicant.Surname']")[2].send_keys(surename)
-        driver.find_element_by_xpath("//input[contains(@type, 'radio') and contains(@ng-value, 'false')]")[2].click()
-
-
-
-
-
+        guarantor_block = "//div[@id='guarantorContainer']/div[contains(@ng-repeat,'filter:{IsGuarantor:true}')][%s]/descendant::"%order
+        self.select_optionbyxpath(guarantor_block+"select[@ng-model='applicant.Applicants']", "Tenant Draytus")
+        self.select_optionbyxpath(guarantor_block + "select[@name='Title[]']", title)
+        driver.find_element_by_xpath(guarantor_block+"input[@ng-model='applicant.FirstName']").send_keys(first_name)
+        driver.find_element_by_xpath(guarantor_block+"input[@ng-model='applicant.Surname']").send_keys(surename)
+        self.select_optionbyxpath(guarantor_block+"select[@ng-model='applicant.ReportType.Value']", report_type)
+        driver.find_element_by_xpath(guarantor_block+"input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
