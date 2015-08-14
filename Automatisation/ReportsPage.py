@@ -6,211 +6,175 @@ class CreatePage(BasePage):
 
 class StatReports(BasePage):
 
-    def test_ReferenceDirectory(self):
+    def make_referencedirectory(self):
         driver = self.driver
         driver.find_element_by_partial_link_text('Reference').click()
-        driver.find_element_by_link_text('Reference directory').click()
-        assert "directory" in driver.title
-        BasePage.set_randomoption(self, 'filter[IncomeType]')
+        self.wait()
+        driver.find_element_by_link_text("Reference directory").click()
+        assert "directory" in self.title
+        self.set_randomoption('filter[IncomeType]')
         self.trigger_filter()
         self.wait()
 
-    def test_CSVreport(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Daily billing").click()
-        assert "CSV Report" in driver.title
-        BasePage.set_date(self)
-        driver.find_element_by_name("build").click()
+    def make_csvreport(self):
+        self.access_report("Daily billing CSV")
+        assert "CSV Report" in self.driver.title
+        self.set_singledate()
+        self.click_button()
         self.wait()
 
-    def test_OverallTAT(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("TAT").click()
-        assert "TAT" in driver.title
+    def make_overalltat(self):
+        self.access_report("Overall TAT")
+        assert "TAT" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_LandlordReport(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("The Landlord").click()
-        assert "Landlord" in driver.title
+    def make_landlordreport(self):
+        self.access_report("Who Is The Landlord Report")
+        assert "Landlord" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
-    def test_ActiveTasks(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Active Tasks ").click()
-        assert "Active Tasks" in driver.title
+    def make_activetasksreport(self):
+        self.access_report("Active Tasks")
+        assert "Active Tasks" in self.title
         self.set_startdate()
         self.set_enddate()
         self.set_randomoption("customer")
         self.wait()
         self.select_all("branches[]")
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
 
-    def test_ReferenceVolumes(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Reference Volumes").click()
-        assert "Reference Volumes" in driver.title
+    def make_referencevolreport(self):
+        self.access_report("Reference Volumes")
+        assert "Reference Volumes" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_ReferenceDecisions(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Reference Decisions").click()
-        assert "Reference Decisions" in driver.title
+    def make_refdecisionreport(self):
+        self.access_report("Reference Decisions")
+        assert "Reference Decisions" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_RefereeResponse(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Referee Response").click()
-        assert "Referee Response" in driver.title
+    def make_refresponsereport(self):
+        self.access_report("Referee Response")
+        assert "Referee Response" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_IncomingCommunications(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Incoming Communications").click()
-        assert "Incoming Communications" in driver.title
+    def make_incomcommreport(self):
+        self.access_report("Incoming Communications")
+        assert "Incoming Communications" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_EquifaxDataSearch(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Equifax data").click()
-        assert "Equifax Data Request" in driver.title
+    def make_equifaxdatasearchreport(self):
+        self.access_report("Equifax data")
+        assert "Equifax Data Request" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
-    def test_TenantsAccepts(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Daily Tenant").click()
-        assert "Daily Tenant" in driver.title
-        self.set_date()
-        driver.find_element_by_name("build").click()
+    def make_tenantacceptsreport(self):
+        self.access_report("Daily Tenant")
+        assert "Daily Tenant" in self.title
+        self.set_singledate()
+        self.click_button()
         self.wait()
 
-    def test_TenantProfile(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Tenant Profile").click()
-        assert "Tenant Profile" in driver.title
+    def make_tenantprofilereport(self):
+        self.access_report("Tenant Profile")
+        assert "Tenant Profile" in self.title
         self.set_startdate()
         self.set_enddate()
         self.set_randomoption("customer")
-        self.wait()
+        self.wait(2)
         self.select_all("branches[]")
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
-    def test_UserActivity(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("User Activity Report").click()
-        assert "User Activity Report" in driver.title
+    def make_useractivityreport(self):
+        self.access_report("User Activity Report")
+        assert "User Activity Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
-        self.wait()
-
-
-    def test_TATbyReference(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("TAT by reference type").click()
-        assert "TAT by reference" in driver.title
-        self.set_startdate()
-        self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_ActiveApplicants(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Active Applicants Report").click()
-        assert "Active Applicants Report" in driver.title
+    def make_tatbyrefreport(self):
+        self.access_report("TAT by reference type")
+        assert "TAT by reference" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_ActiveApplicants(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Active Applicants Report").click()
-        assert "Active Applicants Report" in driver.title
+    def make_activeapplicantsreport(self):
+        self.access_report("Active Applicants Report")
+        assert "Active Applicants Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
-    def test_LeadGeneration(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Lead Generation Report").click()
-        assert "Lead Generation" in driver.title
+    def make_activeappllicantsreport(self):
+        self.access_report("Active Applicants Report")
+        assert "Active Applicants Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
-    def test_ReferenceTurnaround(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("Reference Turnaround").click()
-        assert "Reference Turnaround" in driver.title
+
+    def make_leadgenerationreport(self):
+        self.access_report("Lead Generation Report")
+        assert "Lead Generation" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.set_randomoption("customer")
+        self.click_button()
+        self.wait()
+
+    def make_refturnaroundreport(self):
+        self.access_report("Reference Turnaround")
+        assert "Reference Turnaround" in self.title
+        self.set_startdate("cdate")
+        self.set_enddate("sdate")
         self.wait()
         self.select_all("RMethod[]")
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
-    def test_ActionsReport(self):
-        driver = self.driver
-        driver.find_element_by_link_text("MI").click()
-        driver.find_element_by_partial_link_text("LR Actions").click()
-        assert "LR" in driver.title
+    def make_actionsreport(self):
+        self.access_report("LR Actions")
+        assert "LR" in self.title
         self.set_startdate()
         self.set_enddate()
-        driver.find_element_by_name("build").click()
+        self.click_button()
         self.wait()
 
 
