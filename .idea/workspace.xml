@@ -4,10 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b3d3c96-4627-4cca-963d-b1f547f1796c" name="Default" comment="create application completed">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Automatisation/BasePage.py" afterPath="$PROJECT_DIR$/Automatisation/BasePage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Automatisation/ReportsPage.py" afterPath="$PROJECT_DIR$/Automatisation/ReportsPage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Automatisation/TestReports.py" afterPath="$PROJECT_DIR$/Automatisation/TestReports.py" />
+    <list default="true" id="2b3d3c96-4627-4cca-963d-b1f547f1796c" name="Default" comment="changed the report page">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HomespunAutomation.iws" />
@@ -83,8 +80,8 @@
       <file leaf-file-name="TestReports.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Automatisation/TestReports.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70757735" vertical-offset="0" max-vertical-offset="969">
-              <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+            <state vertical-scroll-proportion="1.3435484" vertical-offset="0" max-vertical-offset="969">
+              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
               <folding>
                 <element signature="e#31#46#0" expanded="true" />
               </folding>
@@ -701,15 +698,22 @@
       <option name="project" value="LOCAL" />
       <updated>1439306368997</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="changed the report page">
+      <created>1439563894136</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1439563894136</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3284974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952693" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32540542" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -723,7 +727,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39792746" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -780,7 +783,8 @@
     <MESSAGE value=" added init method to the user class" />
     <MESSAGE value="drafted the create_tenant method" />
     <MESSAGE value="create application completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="create application completed" />
+    <MESSAGE value="changed the report page" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the report page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1159,8 +1163,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Automatisation/TestReports.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70757735" vertical-offset="0" max-vertical-offset="969">
-          <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+        <state vertical-scroll-proportion="1.3435484" vertical-offset="0" max-vertical-offset="969">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
           <folding>
             <element signature="e#31#46#0" expanded="true" />
           </folding>
