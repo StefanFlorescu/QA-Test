@@ -68,9 +68,9 @@ class BasePage(object):
         driver = self.driver
         driver.find_element_by_name(name_attribute).click()
 
-    def access_report(self, partial_text="Reference directory"):
+    def goto_menuoption(self, menu = "MI", partial_text="Reference directory"):
         driver = self.driver
-        driver.find_element_by_partial_link_text('MI').click()
+        driver.find_element_by_partial_link_text(menu).click()
         self.wait()
         driver.find_element_by_partial_link_text(partial_text).click()
 

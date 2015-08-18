@@ -1,10 +1,9 @@
 from Automatisation.BasePage import BasePage
 
-class CreatePage(BasePage):
-    pass
-
-
 class StatReports(BasePage):
+
+    def access_report(self, report):
+        self.goto_menuoption(partial_text=report)
 
     def make_referencedirectory(self):
         driver = self.driver
@@ -51,8 +50,6 @@ class StatReports(BasePage):
         self.click_button()
         self.wait()
 
-
-
     def make_referencevolreport(self):
         self.access_report("Reference Volumes")
         assert "Reference Volumes" in self.title
@@ -70,7 +67,6 @@ class StatReports(BasePage):
         self.click_button()
         self.wait()
 
-
     def make_refresponsereport(self):
         self.access_report("Referee Response")
         assert "Referee Response" in self.title
@@ -79,7 +75,6 @@ class StatReports(BasePage):
         self.click_button()
         self.wait()
 
-
     def make_incomcommreport(self):
         self.access_report("Incoming Communications")
         assert "Incoming Communications" in self.title
@@ -87,7 +82,6 @@ class StatReports(BasePage):
         self.set_enddate()
         self.click_button()
         self.wait()
-
 
     def make_equifaxdatasearchreport(self):
         self.access_report("Equifax data")
@@ -123,7 +117,6 @@ class StatReports(BasePage):
         self.click_button()
         self.wait()
 
-
     def make_tatbyrefreport(self):
         self.access_report("TAT by reference type")
         assert "TAT by reference" in self.title
@@ -131,7 +124,6 @@ class StatReports(BasePage):
         self.set_enddate()
         self.click_button()
         self.wait()
-
 
     def make_activeapplicantsreport(self):
         self.access_report("Active Applicants Report")
@@ -141,7 +133,6 @@ class StatReports(BasePage):
         self.click_button()
         self.wait()
 
-
     def make_activeappllicantsreport(self):
         self.access_report("Active Applicants Report")
         assert "Active Applicants Report" in self.title
@@ -149,7 +140,6 @@ class StatReports(BasePage):
         self.set_enddate()
         self.click_button()
         self.wait()
-
 
     def make_leadgenerationreport(self):
         self.access_report("Lead Generation Report")
