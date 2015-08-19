@@ -17,8 +17,12 @@ user_pool = dict(Letrisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.
 
 
 class User(object):
-    def __init__(self, customer="Draytus", role="agent"):
+    def __init__(self, instance = "letrisks", customer="Draytus", role="agent"):
         self.customer = customer
+        if instance in "letrisks-acumen.com":
+            self.branch = "None"
+        else:
+            self.branch = "et-1"
         self.role = role
         self.full_name = user_pool[self.customer][self.role][0]
         self.email = user_pool[self.customer][self.role][1]
@@ -35,3 +39,6 @@ class User(object):
     @property
     def name(self):
         return self.full_name
+
+    def set_branch(self, branch):
+        self.branch = branch

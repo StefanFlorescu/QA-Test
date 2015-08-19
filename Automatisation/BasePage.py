@@ -11,7 +11,7 @@ import random
 class BasePage(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
-        self.base_url = 'http://letrisks-acumen.com'
+        self.base_url = 'http://homespun.pre-prod.net'
         self.driver.implicitly_wait(5)
         # self.driver.maximize_window()
         self.year = 2015
@@ -64,9 +64,13 @@ class BasePage(object):
         self.driver.find_element_by_partial_link_text("Account").click()
         self.driver.find_element_by_link_text("Logout").click()
 
-    def click_button(self, name_attribute="build"):
+    def click_button_byname(self, name_attribute="build"):
         driver = self.driver
         driver.find_element_by_name(name_attribute).click()
+
+    def click_button_byvalue(self, value="Submit"):
+        driver = self.driver
+        driver.find_element_by_xpath('//input[@value=\"{0}\"]'.format(str(value))).click()
 
     def goto_menuoption(self, menu = "MI", partial_text="Reference directory"):
         driver = self.driver
@@ -79,13 +83,12 @@ class BasePage(object):
         self.wait()
         self.driver.find_element_by_link_text("Profile").click()
 
-    def create_app(self):
-        self.driver.find_element_by_partial_link_text("Tenancy Application").click()
-        self.driver.find_element_by_link_text("Create Application").click()
-
     def list_apps(self):
         self.driver.find_element_by_partial_link_text("Tenancy Application").click()
         self.driver.find_element_by_link_text("List Applications").click()
+
+    def list_tasks(self):
+        self.driver.find_element_by_partial_link_text("Home").click()
 
     def filter_byaddress(self, tenancy_address):
         self.list_apps()
@@ -98,6 +101,7 @@ class BasePage(object):
         address.find_element_by_name("PostCode").send_keys(postcode + Keys.TAB + Keys.ENTER)
         address_list = address.find_elements_by_class_name("address_item")
         address_list[random.randint(0, address_list.__len__() - 1)].click()
+
 
     def set_singledate(self):
         self.set_date("date", self.start_month, self.year, self.startday)
@@ -125,9 +129,16 @@ class BasePage(object):
         select.select_by_index(
             random.randint(1, len(options.find_elements_by_tag_name("option")) - 1))
 
-    def select_all(self, name_attribute):
+    def select_all_byname(self, name_attribute):
         driver = self.driver
         elem = driver.find_element_by_name(str(name_attribute))
+        options = elem.find_elements_by_tag_name("option")
+        for option in options:
+            option.click()
+
+    def select_all_byxpath(self, select_id):
+        driver = self.driver
+        elem = driver.find_element_by_xpath(select_id)
         options = elem.find_elements_by_tag_name("option")
         for option in options:
             option.click()
@@ -146,6 +157,10 @@ class BasePage(object):
             Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(select_option)
         if type(select_option) == int:
             Select(driver.find_element_by_xpath(select_id)).select_by_value(str(select_option))
+
+    def get_element_byngmodel(self, model):
+        driver = self.driver
+        return driver.find_element_by_xpath('//input[@ng-model=\"{0}\"]'.format(str(model)))
 
     def trigger_filter(self):
         self.driver.find_element_by_xpath('//input[@value="Filter"]').click()

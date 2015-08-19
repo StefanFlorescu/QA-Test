@@ -19,7 +19,7 @@ class StatReports(BasePage):
         self.access_report("Daily billing CSV")
         assert "CSV Report" in self.driver.title
         self.set_singledate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_overalltat(self):
@@ -27,7 +27,7 @@ class StatReports(BasePage):
         assert "TAT" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
 
@@ -36,7 +36,7 @@ class StatReports(BasePage):
         assert "Landlord" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_activetasksreport(self):
@@ -46,8 +46,8 @@ class StatReports(BasePage):
         self.set_enddate()
         self.set_randomoption("customer")
         self.wait()
-        self.select_all("branches[]")
-        self.click_button()
+        self.select_all_byname("branches[]")
+        self.click_button_byname()
         self.wait()
 
     def make_referencevolreport(self):
@@ -55,7 +55,7 @@ class StatReports(BasePage):
         assert "Reference Volumes" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
 
@@ -64,7 +64,7 @@ class StatReports(BasePage):
         assert "Reference Decisions" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_refresponsereport(self):
@@ -72,7 +72,7 @@ class StatReports(BasePage):
         assert "Referee Response" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_incomcommreport(self):
@@ -80,7 +80,7 @@ class StatReports(BasePage):
         assert "Incoming Communications" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_equifaxdatasearchreport(self):
@@ -88,14 +88,14 @@ class StatReports(BasePage):
         assert "Equifax Data Request" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_tenantacceptsreport(self):
         self.access_report("Daily Tenant")
         assert "Daily Tenant" in self.title
         self.set_singledate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_tenantprofilereport(self):
@@ -105,8 +105,8 @@ class StatReports(BasePage):
         self.set_enddate()
         self.set_randomoption("customer")
         self.wait(2)
-        self.select_all("branches[]")
-        self.click_button()
+        self.select_all_byname("branches[]")
+        self.click_button_byname()
         self.wait()
 
     def make_useractivityreport(self):
@@ -114,7 +114,7 @@ class StatReports(BasePage):
         assert "User Activity Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_tatbyrefreport(self):
@@ -122,7 +122,7 @@ class StatReports(BasePage):
         assert "TAT by reference" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_activeapplicantsreport(self):
@@ -130,7 +130,7 @@ class StatReports(BasePage):
         assert "Active Applicants Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_activeappllicantsreport(self):
@@ -138,7 +138,7 @@ class StatReports(BasePage):
         assert "Active Applicants Report" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_leadgenerationreport(self):
@@ -146,7 +146,7 @@ class StatReports(BasePage):
         assert "Lead Generation" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
     def make_refturnaroundreport(self):
@@ -155,8 +155,8 @@ class StatReports(BasePage):
         self.set_startdate("cdate")
         self.set_enddate("sdate")
         self.wait()
-        self.select_all("RMethod[]")
-        self.click_button()
+        self.select_all_byname("RMethod[]")
+        self.click_button_byname()
         self.wait()
 
     def make_actionsreport(self):
@@ -164,7 +164,7 @@ class StatReports(BasePage):
         assert "LR" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.click_button()
+        self.click_button_byname()
         self.wait()
 
 

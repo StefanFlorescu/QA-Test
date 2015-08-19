@@ -171,7 +171,3 @@ class Applicant(object):
     def set_report_type(self, value):
         self.report_type = value
 
-
-# if __name__ == '__main__':
-#     x = User()
-# print(x.__dict__)

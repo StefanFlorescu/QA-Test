@@ -4,5 +4,5 @@ from Automatisation.BasePage import BasePage
 
 class Communications(BasePage):
 
-    def access_comunication(self, com):
-        self.goto_menuoption(partial_text= com)
+    def access_comunication(self, communication_cathegory):
+        self.goto_menuoption(partial_text= communication_cathegory)

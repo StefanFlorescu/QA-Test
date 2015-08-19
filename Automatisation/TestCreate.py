@@ -5,29 +5,32 @@ from Automatisation import applicants
 from Automatisation import users
 import unittest
 
-user = users.User()
-tenant_list = [applicants.Applicant() for i in range(2)]
+user = users.User(instance="homespun")
+applicant_list = [applicants.Applicant() for i in range(3)]
 
 
-class ReportTests(unittest.TestCase):
+class ApplicationGroupTests(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_Reports(self):
+    def test_should_create_application(self):
         create = ApplicationPage()
-        create.go()
         create.ag_login()
         create.create_app()
-        create.wait(3)
-        create.set_branch("LetRisks")
+        create.set_branch(user.branch)
         create.set_property()
         create.set_rental_details(2000, 12)
-        tenant_order =1
-        for tenant in tenant_list:
-            create.set_tenant(tenant.title, tenant.name, tenant.surename, tenant.report_type, tenant.rentshare,
-                              tenant_order)
-            tenant_order = 1+ tenant_order
-        #create.set_guarantor()
+        tenant = applicant_list[0]
+        create.set_tenant(tenant.title, tenant.name, tenant.surename, tenant.report_type, tenant.rentshare, 1)
+        tenant = applicant_list[1]
+        create.set_tenant(tenant.title, tenant.name, tenant.surename, "Instant", tenant.rentshare, 2)
+        guarantor = applicant_list[2]
+        create.set_guarantor(guarantor.title, guarantor.name, guarantor.surename, guarantor.report_type)
+        create.click_button_byvalue()
+        self.assertIn(create.driver.title, "Complete application", "The applications have been successfully made")
+        create.list_tasks()
+
+
 
 
     def tearDown(self):
