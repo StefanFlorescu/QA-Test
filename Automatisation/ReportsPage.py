@@ -11,13 +11,15 @@ class StatReports(BasePage):
         self.wait()
         driver.find_element_by_link_text("Reference directory").click()
         assert "directory" in self.title
-        self.set_randomoption('filter[IncomeType]')
-        self.trigger_filter()
-        self.wait()
+        for i in range(5):
+            self.select_randomoption_byname('filter[IncomeType]')
+            self.click_button_byvalue("Filter")
+            self.wait()
 
     def make_csvreport(self):
         self.access_report("Daily billing CSV")
         assert "CSV Report" in self.driver.title
+        self.select_all_byname("cid[]")
         self.set_singledate()
         self.click_button_byname()
         self.wait()
@@ -27,6 +29,7 @@ class StatReports(BasePage):
         assert "TAT" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -36,6 +39,7 @@ class StatReports(BasePage):
         assert "Landlord" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -44,7 +48,7 @@ class StatReports(BasePage):
         assert "Active Tasks" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.set_randomoption("customer")
+        self.select_randomoption_byname("customer")
         self.wait()
         self.select_all_byname("branches[]")
         self.click_button_byname()
@@ -55,6 +59,7 @@ class StatReports(BasePage):
         assert "Reference Volumes" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -64,6 +69,7 @@ class StatReports(BasePage):
         assert "Reference Decisions" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -72,6 +78,7 @@ class StatReports(BasePage):
         assert "Referee Response" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -80,6 +87,7 @@ class StatReports(BasePage):
         assert "Incoming Communications" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -88,6 +96,7 @@ class StatReports(BasePage):
         assert "Equifax Data Request" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -95,6 +104,7 @@ class StatReports(BasePage):
         self.access_report("Daily Tenant")
         assert "Daily Tenant" in self.title
         self.set_singledate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -103,7 +113,7 @@ class StatReports(BasePage):
         assert "Tenant Profile" in self.title
         self.set_startdate()
         self.set_enddate()
-        self.set_randomoption("customer")
+        self.select_randomoption_byname("customer")
         self.wait(2)
         self.select_all_byname("branches[]")
         self.click_button_byname()
@@ -114,6 +124,7 @@ class StatReports(BasePage):
         assert "User Activity Report" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -122,6 +133,7 @@ class StatReports(BasePage):
         assert "TAT by reference" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -130,14 +142,16 @@ class StatReports(BasePage):
         assert "Active Applicants Report" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
-    def make_activeappllicantsreport(self):
-        self.access_report("Active Applicants Report")
-        assert "Active Applicants Report" in self.title
+    def make_activeapplicationsreport(self):
+        self.access_report("Active Applications Report")
+        assert "Active Applications Report" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
@@ -146,15 +160,17 @@ class StatReports(BasePage):
         assert "Lead Generation" in self.title
         self.set_startdate()
         self.set_enddate()
+        self.select_all_byname("cid[]")
         self.click_button_byname()
         self.wait()
 
     def make_refturnaroundreport(self):
         self.access_report("Reference Turnaround")
         assert "Reference Turnaround" in self.title
-        self.set_startdate("cdate")
-        self.set_enddate("sdate")
+        self.select_all_byname("cid[]")
         self.wait()
+        self.set_startdate()
+        self.set_enddate()
         self.select_all_byname("RMethod[]")
         self.click_button_byname()
         self.wait()
@@ -162,6 +178,54 @@ class StatReports(BasePage):
     def make_actionsreport(self):
         self.access_report("LR Actions")
         assert "LR" in self.title
+        self.set_startdate()
+        self.set_enddate()
+        self.select_all_byname("cid[]")
+        self.click_button_byname()
+        self.wait()
+
+    def make_communstatsreport(self):
+        self.access_report("Communication Statistics")
+        assert "Communication" in self.title
+        self.select_all_byname("cid[]")
+        self.click_button_byname()
+        self.wait()
+
+    def make_procstats(self):
+        self.access_report("Process Stats")
+        assert "Process" in self.title
+        self.set_startdate()
+        self.set_enddate()
+        self.select_all_byname("cid[]")
+        self.click_button_byname()
+        self.wait()
+
+    def make_refobtaining(self):
+        self.access_report("Reference Obtaining")
+        assert "Reference" in self.title
+        self.set_startdate()
+        self.set_enddate()
+        self.select_all_byname("cid[]")
+        self.click_button_byname()
+        self.wait()
+
+    def make_outstandingwork(self):
+        self.access_report("Outstanding Work")
+        assert "Outstanding" in self.title
+        self.wait()
+
+    def make_tenantappoutcome(self):
+        self.access_report("Outcome Stats Report")
+        assert "Tenant Application" in self.title
+        self.set_startdate()
+        self.set_enddate()
+        self.select_all_byname("cid[]")
+        self.click_button_byname()
+        self.wait()
+
+    def workitemreport(self):
+        self.access_report("Work Item Stats")
+        assert "Work Item Stats" in self.title
         self.set_startdate()
         self.set_enddate()
         self.click_button_byname()

@@ -13,14 +13,22 @@ class Application (object):
         self.address_flat = ""
         self.address_house_name = ""
         self.address_street = ""
-        self.address_disctrict = ""
+        self.address_district = ""
         self.address_town = ""
         self.address_county = ""
 
 
 
-    def set_tenacy_address(self, new):
-        self.tency_adddress.__add__(new)
+    def set_adress(self, postcode, house_number, house_name, flat, street, district, town, county):
+        self.address_postcode = postcode
+        self.address_house_name = house_name
+        self.address_house_nr = house_number
+        self.address_flat = flat
+        self.address_street = street
+        self.address_district = district
+        self.address_town = town
+        self.address_county = county
+
 
 
     # def landlord_details(self):
