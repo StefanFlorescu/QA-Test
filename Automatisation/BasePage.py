@@ -124,7 +124,7 @@ class BasePage(object):
 
     def set_date(self, locator_name, month, year, day):
         self.driver.find_element_by_name(locator_name).click()
-        self.wait()
+        self.wait(0)
         self.select_optionbyxpath(
             '//div[@class="ui-datepicker-title"]/select[@class="ui-datepicker-month"]', month)
         self.select_optionbyxpath(

@@ -94,3 +94,9 @@ class ApplicationPage(BasePage):
         self.select_optionbyxpath(guarantor_block + "select[@ng-model='applicant.ReportType.Value']", report_type)
         driver.find_element_by_xpath(
             guarantor_block + "input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
+
+    def get_agent_task(self, applicant_name, applicant_surename, tenancy_address):
+        driver = self.driver
+        return driver.find_element_by_xpath(
+            'tr[@class="task"]/descendant::td[contains(text(),\"{0}\")and contains(text(),\"{1}\")]/followin-sibling::td[contains(text(),\"{2}\")]'.format(
+                applicant_name, applicant_surename, tenancy_address))

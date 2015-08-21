@@ -37,6 +37,15 @@ class ApplicationGroupTests(unittest.TestCase):
         self.assertIn(create.driver.title, "Complete application", "Error creating application !")
         create.list_dashboard()
 
+    def test_agent_task_should_create(self):
+        task = ApplicationPage()
+        task.ag_login()
+        task.list_dashboard()
+        self.assertIn("Notifications", task.title)
+        for applicant in applicant_list:
+            self.assertIsNone(task.get_agent_task(applicant.name, applicant.surename, application.address_town),
+                              "The task for {0} {1} was not generated".format(applicant.name, applicant.surename))
+
 
     def tearDown(self):
         pass
