@@ -17,7 +17,7 @@ class ApplicationGroupTests(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_should_create_application(self):
+    def test_1_create_appgroup(self):
         create = ApplicationPage()
         create.ag_login()
         create.create_app()
@@ -36,16 +36,23 @@ class ApplicationGroupTests(unittest.TestCase):
         create.wait(10)
         self.assertIn(create.driver.title, "Complete application", "Error creating application !")
         create.list_dashboard()
+        create.close()
 
-    def test_agent_task_should_create(self):
+    def test_2_asserttasks(self):
         task = ApplicationPage()
         task.ag_login()
         task.list_dashboard()
         self.assertIn("Notifications", task.title)
         for applicant in applicant_list:
-            self.assertIsNone(task.get_agent_task(applicant.name, applicant.surename, application.address_town),
+            self.assertIsNotNone(task.get_agent_task(applicant.name, applicant.surename, application.address_county),
                               "The task for {0} {1} was not generated".format(applicant.name, applicant.surename))
-
+            task.get_agent_task(applicant.name, applicant.surename,
+                                application.address_county).find_element_by_link_text("Action").click()
+            self.assertIn(applicant.name, task.title)
+            self.assertIn(applicant.surename, task.title)
+            self.assertIn("Waiting for", task.title)
+            task.list_dashboard()
+        task.close()
 
     def tearDown(self):
         pass

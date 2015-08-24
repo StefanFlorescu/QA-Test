@@ -28,10 +28,3 @@ class Application (object):
         self.address_district = district
         self.address_town = town
         self.address_county = county
-
-    def set_tenancy_address(self, full_address):
-        self.tency_adddress = full_address
-
-
-
-    # def landlord_details(self):

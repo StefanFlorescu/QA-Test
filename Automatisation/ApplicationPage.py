@@ -98,5 +98,5 @@ class ApplicationPage(BasePage):
     def get_agent_task(self, applicant_name, applicant_surename, tenancy_address):
         driver = self.driver
         return driver.find_element_by_xpath(
-            'tr[@class="task"]/descendant::td[contains(text(),\"{0}\")and contains(text(),\"{1}\")]/followin-sibling::td[contains(text(),\"{2}\")]'.format(
+            '//td[contains(text(),\"{0}\")and contains(text(),\"{1}\")]/following-sibling::td[contains(text(),\"{2}\")]/ancestor::tr[@class="task"]'.format(
                 applicant_name, applicant_surename, tenancy_address))
