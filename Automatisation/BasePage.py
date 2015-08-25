@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as expect
+from selenium.webdriver.common.by import By
 import time
 import random
 
@@ -111,7 +113,14 @@ class BasePage(object):
         address.find_element_by_name("PostCode").clear()
         address.find_element_by_name("PostCode").send_keys(postcode + Keys.TAB + Keys.ENTER)
         address_list = address.find_elements_by_class_name("address_item")
-        address_list[random.randint(0, address_list.__len__() - 1)].click()
+        address_list[self.random_int(0, address_list.__len__() - 1)].click()
+
+    def set_address(self, address):
+        address = self.driver
+        address.find_element_by_name("PostCode").clear()
+        address.find_element_by_name("PostCode").send_keys(self.postcode + Keys.TAB + Keys.ENTER)
+        address.find_element_by_xpath('//li[@class="address_item" and starts-with(text(),{})]'.format(str(address))).click()
+
 
     def set_singledate(self):
         self.set_date("date", self.start_month, self.year, self.startday)
@@ -131,6 +140,11 @@ class BasePage(object):
             '//div[@class="ui-datepicker-title"]/select[@class="ui-datepicker-year"]', year)
         datepicker = self.driver.find_element_by_id("ui-datepicker-div")
         datepicker.find_element_by_link_text(str(day)).click()
+
+    def input_date_byname(self, name_attribute, string_input):
+        driver = self.driver
+        input = driver.find_element_by_name(name_attribute)
+        input.send_keys(string_input)
 
 
 
@@ -164,16 +178,16 @@ class BasePage(object):
 
     def select_option_byname(self, select_id, select_option):
         driver = self.driver
-        Select(driver.find_element_by_name(select_id)).select_by_visible_text(select_option)
+        Select(driver.find_element_by_name(select_id)).select_by_visible_text(str(select_option))
 
     def select_option_byid(self, select_id, select_option):
         driver = self.driver
-        Select(driver.find_element_by_id(select_id)).select_by_visible_text(select_option)
+        Select(driver.find_element_by_id(select_id)).select_by_visible_text(str(select_option))
 
     def select_optionbyxpath(self, select_id, select_option):
         driver = self.driver
         if type(select_option) == str:
-            Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(select_option)
+            Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(str(select_option))
         if type(select_option) == int:
             Select(driver.find_element_by_xpath(select_id)).select_by_value(str(select_option))
 
@@ -182,6 +196,9 @@ class BasePage(object):
     def get_element_byngmodel(self, model):
         driver = self.driver
         return driver.find_element_by_xpath('//input[@ng-model=\"{0}\"]'.format(str(model)))
+
+    def wait_element(self, wait_time = 10, xpath="//div"):
+        return WebDriverWait(self.driver, wait_time).until(expect.presence_of_element_located((By.XPATH, xpath)))
 
     def close(self):
         self.driver.close()
@@ -197,3 +214,7 @@ class BasePage(object):
     @staticmethod
     def wait(period=1):
         time.sleep(period)
+
+    @staticmethod
+    def random_int(start=0, end=10):
+        return random.randint(start, end)
