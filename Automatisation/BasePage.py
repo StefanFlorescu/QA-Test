@@ -13,7 +13,7 @@ import random
 class BasePage(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
-        self.base_url = 'http://homespun.lan'
+        self.base_url = 'http://homespun.pre-prod.net'
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.year = 2015
@@ -108,18 +108,17 @@ class BasePage(object):
 
 
 
-    def set_randomaddress(self, postcode):
+    def set_randomaddress(self, postcode_name="PostCode"):
         address = self.driver
-        address.find_element_by_name("PostCode").clear()
-        address.find_element_by_name("PostCode").send_keys(postcode + Keys.TAB + Keys.ENTER)
+        address.find_element_by_name(postcode_name).clear()
+        address.find_element_by_name(postcode_name).send_keys(self.postcode + Keys.TAB + Keys.ENTER)
         address_list = address.find_elements_by_class_name("address_item")
         address_list[self.random_int(0, address_list.__len__() - 1)].click()
 
-    def set_address(self, address):
+    def set_address(self, postcode_field_name, address_string):
         address = self.driver
-        address.find_element_by_name("PostCode").clear()
-        address.find_element_by_name("PostCode").send_keys(self.postcode + Keys.TAB + Keys.ENTER)
-        address.find_element_by_xpath('//li[@class="address_item" and starts-with(text(),{})]'.format(str(address))).click()
+        address.find_element_by_name(postcode_field_name).send_keys(self.postcode + Keys.TAB + Keys.ENTER)
+        address.find_element_by_xpath('//li[@class="address_item" and contains(text(), \"{0}\")]'.format(str(address_string))).click()
 
 
     def set_singledate(self):
@@ -131,14 +130,17 @@ class BasePage(object):
     def set_enddate(self, locator="edate"):
         self.set_date(locator, self.end_month, self.year, self.endday)
 
-    def set_date(self, locator_name, month, year, day):
+    def set_date(self, locator_name, date_string):
         self.driver.find_element_by_name(locator_name).click()
-        self.wait(0)
-        self.select_optionbyxpath(
-            '//div[@class="ui-datepicker-title"]/select[@class="ui-datepicker-month"]', month)
-        self.select_optionbyxpath(
-            '//div[@class="ui-datepicker-title"]/select[@class="ui-datepicker-year"]', year)
-        datepicker = self.driver.find_element_by_id("ui-datepicker-div")
+        date_pool = date_string.split("/")
+        day = self.format_date(date_pool[0])
+        month = self.format_date(date_pool[1])
+        year = self.format_date(date_pool[2])
+        self.select_option_byxpath(
+            '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-month"]', int(month)-1)
+        self.select_option_byxpath(
+            '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-year"]', year)
+        datepicker = self.driver.find_element_by_xpath('//table[@class="ui-datepicker-calendar"]/tbody')
         datepicker.find_element_by_link_text(str(day)).click()
 
     def input_date_byname(self, name_attribute, string_input):
@@ -178,13 +180,19 @@ class BasePage(object):
 
     def select_option_byname(self, select_id, select_option):
         driver = self.driver
-        Select(driver.find_element_by_name(select_id)).select_by_visible_text(str(select_option))
+        if type(select_option) == str:
+            Select(driver.find_element_by_name(select_id)).select_by_visible_text(str(select_option))
+        if type(select_option) == int:
+            Select(driver.find_element_by_name(select_id)).select_by_value(str(select_option))
 
     def select_option_byid(self, select_id, select_option):
         driver = self.driver
-        Select(driver.find_element_by_id(select_id)).select_by_visible_text(str(select_option))
+        if type(select_option) == str:
+            Select(driver.find_element_by_id(select_id)).select_by_visible_text(str(select_option))
+        if type(select_option) == int:
+            Select(driver.find_element_by_id(select_id)).select_by_value(str(select_option))
 
-    def select_optionbyxpath(self, select_id, select_option):
+    def select_option_byxpath(self, select_id, select_option):
         driver = self.driver
         if type(select_option) == str:
             Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(str(select_option))
@@ -218,3 +226,10 @@ class BasePage(object):
     @staticmethod
     def random_int(start=0, end=10):
         return random.randint(start, end)
+
+    @staticmethod
+    def format_date(string):
+        if string.startswith("0"):
+            return string[1:]
+        else:
+            return string
