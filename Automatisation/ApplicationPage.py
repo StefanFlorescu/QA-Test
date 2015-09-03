@@ -81,6 +81,22 @@ class ApplicationPage(BasePage):
             tenant_block + "input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
         self.select_option_byxpath(tenant_block + "select[@ng-model='applicant.ApplicantPayingInAdvance.Value']", "No")
 
+    def set_combined_tenant(self, title="Mr", first_name="Tenant", surename="Draytus", report_type="Tenant & Guarantor Combined",
+                   rent_share=1000, order=1):
+        driver = self.driver
+        driver.find_element_by_xpath("//input[@value='Add Tenant']").click()
+        tenant_block = "//div[@id='tenantContainer']/div[contains(@ng-repeat,'filter:{IsGuarantor:false}')][%s]/descendant::" % order
+        self.select_option_byxpath(tenant_block + "select[@name='Title[]']", title)
+        driver.find_element_by_xpath(tenant_block + "input[@ng-model='applicant.FirstName']").send_keys(first_name)
+        driver.find_element_by_xpath(tenant_block + "input[@ng-model='applicant.Surname']").send_keys(surename)
+        rent_field = driver.find_element_by_xpath(tenant_block + "input[@ng-model='applicant.ShareOfRent.Value']")
+        rent_field.clear()
+        rent_field.send_keys(rent_share)
+        self.select_option_byxpath(tenant_block + "select[@ng-model='applicant.ReportType.Value']", report_type)
+        driver.find_element_by_xpath(
+            tenant_block + "input[contains(@type, 'radio') and contains(@ng-value, 'false')]").click()
+        self.select_option_byxpath(tenant_block + "select[@ng-model='applicant.ApplicantPayingInAdvance.Value']", "No")
+        
 
     def set_guarantor(self, title="Mr", first_name="Guarantor", surename="Draytus", report_type="Comprehensive",
                       rent_share=1000, order=1):

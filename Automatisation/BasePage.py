@@ -16,11 +16,8 @@ class BasePage(object):
         self.base_url = 'http://homespun.pre-prod.net'
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
-        self.year = 2015
-        self.start_month = 7
-        self.end_month = 7
-        self.startday = 4
-        self.endday = 30
+        self.start_date = "01/08/2015"
+        self.end_date = time.strftime("%d/%m/%Y")
         if self.base_url.__contains__("letrisks-acumen"):
             self.postcode = "IV44 8TZ"
         else:
@@ -67,7 +64,7 @@ class BasePage(object):
 
 
 
-    def click_button_byname(self, name_attribute="build"):
+    def click_button_byname(self,  name_attribute="build"):
         driver = self.driver
         driver.find_element_by_name(name_attribute).click()
 
@@ -121,14 +118,15 @@ class BasePage(object):
         address.find_element_by_xpath('//li[@class="address_item" and contains(text(), \"{0}\")]'.format(str(address_string))).click()
 
 
+
     def set_singledate(self):
-        self.set_date("date", self.start_month, self.year, self.startday)
+        self.set_date("date", self.start_date)
 
     def set_startdate(self, locator="sdate"):
-        self.set_date(locator, self.start_month, self.year, self.startday)
+        self.set_date(locator, self.start_date)
 
     def set_enddate(self, locator="edate"):
-        self.set_date(locator, self.end_month, self.year, self.endday)
+        self.set_date(locator, self.end_date)
 
     def set_date(self, locator_name, date_string):
         self.driver.find_element_by_name(locator_name).click()
@@ -142,6 +140,8 @@ class BasePage(object):
             '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-year"]', year)
         datepicker = self.driver.find_element_by_xpath('//table[@class="ui-datepicker-calendar"]/tbody')
         datepicker.find_element_by_link_text(str(day)).click()
+
+
 
     def input_date_byname(self, name_attribute, string_input):
         driver = self.driver

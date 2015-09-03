@@ -80,6 +80,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_incomcommreport(self):
@@ -89,6 +90,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_equifaxdatasearchreport(self):
@@ -98,6 +100,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_tenantacceptsreport(self):
@@ -106,6 +109,7 @@ class StatReports(BasePage):
         self.set_singledate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_tenantprofilereport(self):
@@ -117,6 +121,7 @@ class StatReports(BasePage):
         self.wait(2)
         self.select_all_byname("branches[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_useractivityreport(self):
@@ -126,6 +131,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_tatbyrefreport(self):
@@ -135,6 +141,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_activeapplicantsreport(self):
@@ -144,6 +151,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_activeapplicationsreport(self):
@@ -153,6 +161,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_leadgenerationreport(self):
@@ -162,6 +171,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_refturnaroundreport(self):
@@ -173,6 +183,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("RMethod[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_actionsreport(self):
@@ -182,22 +193,27 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_communstatsreport(self):
         self.access_report("Communication Statistics")
         assert "Communication" in self.title
         self.select_all_byname("cid[]")
+        self.set_startdate()
+        self.set_enddate()
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_procstats(self):
-        self.access_report("Process Stats")
+        self.access_report("Process stats")
         assert "Process" in self.title
         self.set_startdate()
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_refobtaining(self):
@@ -207,6 +223,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def make_outstandingwork(self):
@@ -221,6 +238,7 @@ class StatReports(BasePage):
         self.set_enddate()
         self.select_all_byname("cid[]")
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
     def workitemreport(self):
@@ -229,6 +247,7 @@ class StatReports(BasePage):
         self.set_startdate()
         self.set_enddate()
         self.click_button_byname()
+        self.click_button_byname("export")
         self.wait()
 
 

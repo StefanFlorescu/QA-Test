@@ -53,7 +53,7 @@ class ApplicationForm(BasePage):
             income_amount.send_keys(str(self.random_int(10000, 20000)))
 
     def set_address_history(self, applicant_addresses):
-        driver = self.driver
+        driver = self.driver.find_element_by_id("address-history-details")
         self.driver.find_element_by_link_text("Address History").click()
         for i in applicant_addresses:
             if i != "":
@@ -71,7 +71,7 @@ class ApplicationForm(BasePage):
 
     def set_nextofkin(self):
         self.driver.find_element_by_link_text("Next Of Kin").click()
-        driver = self.driver
+        driver = self.driver.find_element_by_id("nextofkin-details")
         driver.find_element_by_name("NextOfKin_FirstName").send_keys("Test Name")
         driver.find_element_by_name("NextOfKin_Surname").send_keys("Test Surename")
         driver.find_element_by_name("NextOfKin_Relationship").send_keys("Brother")
@@ -91,7 +91,6 @@ class ApplicationForm(BasePage):
                 driver = self.driver.find_element_by_xpath('//div[@class="child"][{0}]'.format(i))
                 driver.find_element_by_name("children-FirstName[]").send_keys("Test_child_{0}".format(i))
                 driver.find_element_by_name("children-Surname[]").send_keys("Test_surename")
-                gi
 
 
 
