@@ -11,9 +11,9 @@ import random
 
 
 class BasePage(object):
-    def __init__(self):
+    def __init__(self, instance_url= 'https://sandbox.letrisks-acumen.com'):
         self.driver = webdriver.Firefox()
-        self.base_url = 'https://sandbox.letrisks-acumen.com'
+        self.base_url = instance_url
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.start_date = "01/08/2015"

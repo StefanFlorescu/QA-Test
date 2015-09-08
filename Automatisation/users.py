@@ -2,7 +2,16 @@ __author__ = 'StefanFlorescu'
 
 user_pool = dict(
 
+    production=dict(
+        url="letrisks-acumen.com",
+        LetRisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "lr_manager", "None"],
+                      area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "None"],
+                      branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "None"],
+                      agent=["QA test", "testinginbox@yahoo.com", "123456", "None"],
+                      operator=["Draytus Operator", "testingsitesqa@hotmail.com", "123456", "None"])),
+
     sandbox=dict(
+        url="http://sandbox.letrisks-acumen.com",
         Letrisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "4cEfruzacr"],
                       area_manager=[],
                       branch_manager=[],
@@ -18,13 +27,17 @@ user_pool = dict(
                           agent=["QA API Test", "testinginbox@yahoo.com", "123456"],
                           operator=[])),
 
-    preprod= dict( Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
+    preprod= dict(
+        url="http://homespun.pre-prod.net",
+        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
                  area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
                  branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456"],
                  agent=["Draytus Test", "testinginbox@gmail.com", "123456"],
                  operator=["QA Operator", "testingsitesqa@hotmail.com", "123456"])),
 
-    testing = dict(Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
+    testing = dict(
+        url="http://homespuntesting.lan",
+        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
                  area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
                  branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456"],
                  agent=["Draytus Test", "testinginbox@gmail.com", "123456"],
