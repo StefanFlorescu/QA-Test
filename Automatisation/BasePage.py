@@ -13,7 +13,7 @@ import random
 class BasePage(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
-        self.base_url = 'http://homespun.pre-prod.net'
+        self.base_url = 'https://sandbox.letrisks-acumen.com'
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.start_date = "01/08/2015"
@@ -34,29 +34,29 @@ class BasePage(object):
         self.driver.find_element_by_name("password").send_keys(str(password))
         self.driver.find_element_by_name("loginbutton").click()
 
-    def ag_login(self):
+    def ag_login(self, sys_user):
         self.go()
-        self.login()
+        self.login(sys_user.username, sys_user.password)
 
-    def mg_login(self):
+    def mg_login(self, sys_user):
         self.go()
-        self.login("lr_manager@letrisks-acumen.com", "lr_manager")
+        self.login(sys_user.username, sys_user.password)
 
-    def op_login(self):
+    def op_login(self, sys_user):
         self.go()
-        self.login("testingsitesqa@hotmail.com", 123456)
+        self.login(sys_user.username, sys_user.password)
 
-    def admin_login(self):
+    def admin_login(self, sys_user):
         self.go()
-        self.login("testingsitesqa@yahoo.com", 123456)
+        self.login(sys_user.username, sys_user.password)
 
-    def branch_login(self):
+    def branch_login(self, sys_user):
         self.go()
-        self.login("testingsitesqa@outlook.com", 123456)
+        self.login(sys_user.username, sys_user.password)
 
-    def area_login(self):
+    def area_login(self, sys_user):
         self.go()
-        self.login("testingsitesqa@yandex.com", 123456)
+        self.login(sys_user.username, sys_user.password)
 
     def logout(self):
         self.driver.find_element_by_partial_link_text("Account").click()
@@ -119,17 +119,17 @@ class BasePage(object):
 
 
 
-    def set_singledate(self):
-        self.set_date("date", self.start_date)
+    def set_singledate(self, webelement):
+        self.set_date(webelement, "date", self.start_date)
 
-    def set_startdate(self, locator="sdate"):
-        self.set_date(locator, self.start_date)
+    def set_startdate(self, webelement, locator="sdate"):
+        self.set_date(webelement, locator, self.start_date)
 
-    def set_enddate(self, locator="edate"):
-        self.set_date(locator, self.end_date)
+    def set_enddate(self, webelement, locator="edate"):
+        self.set_date(webelement, locator, self.end_date)
 
-    def set_date(self, locator_name, date_string):
-        self.driver.find_element_by_name(locator_name).click()
+    def set_date(self, webelement, locator_name, date_string):
+        webelement.find_element_by_name(locator_name).click()
         date_pool = date_string.split("/")
         day = self.format_date(date_pool[0])
         month = self.format_date(date_pool[1])
@@ -143,61 +143,53 @@ class BasePage(object):
 
 
 
-    def input_date_byname(self, name_attribute, string_input):
-        driver = self.driver
-        input = driver.find_element_by_name(name_attribute)
+    def input_date_byname(self, webelement, name_attribute, string_input):
+        input = webelement.find_element_by_name(name_attribute)
         input.send_keys(string_input)
 
 
 
-    def select_randomoption_byname(self, name_attribute):
-        driver = self.driver
-        options = driver.find_element_by_name(str(name_attribute))
+    def select_randomoption_byname(self, webelement, name_attribute):
+        options = webelement.find_element_by_name(str(name_attribute))
         select = Select(options)
         select.select_by_index(
             random.randint(1, len(options.find_elements_by_tag_name("option")) - 1))
 
-    def select_randomoption_byxpath(self, attribute):
-        driver = self.driver
-        options = driver.find_element_by_xpath(str(attribute))
+    def select_randomoption_byxpath(self, webelement, attribute):
+        options = webelement.find_element_by_xpath(str(attribute))
         select = Select(options)
         select.select_by_index(
             random.randint(1, len(options.find_elements_by_tag_name("option")) - 1))
 
-    def select_all_byname(self, name_attribute):
-        driver = self.driver
-        elem = driver.find_element_by_name(str(name_attribute))
+    def select_all_byname(self, webelement, name_attribute):
+        elem = webelement.find_element_by_name(str(name_attribute))
         options = elem.find_elements_by_tag_name("option")
         for option in options:
             option.click()
 
-    def select_all_byxpath(self, select_id):
-        driver = self.driver
-        elem = driver.find_element_by_xpath(select_id)
+    def select_all_byxpath(self, webelement, select_id):
+        elem = webelement.find_element_by_xpath(select_id)
         options = elem.find_elements_by_tag_name("option")
         for option in options:
             option.click()
 
-    def select_option_byname(self, select_id, select_option):
-        driver = self.driver
+    def select_option_byname(self, webelement, select_id, select_option):
         if type(select_option) == str:
-            Select(driver.find_element_by_name(select_id)).select_by_visible_text(str(select_option))
+            Select(webelement.find_element_by_name(select_id)).select_by_visible_text(str(select_option))
         if type(select_option) == int:
-            Select(driver.find_element_by_name(select_id)).select_by_value(str(select_option))
+            Select(webelement.find_element_by_name(select_id)).select_by_value(str(select_option))
 
-    def select_option_byid(self, select_id, select_option):
-        driver = self.driver
+    def select_option_byid(self, webelement, select_id, select_option):
         if type(select_option) == str:
-            Select(driver.find_element_by_id(select_id)).select_by_visible_text(str(select_option))
+            Select(webelement.find_element_by_id(select_id)).select_by_visible_text(str(select_option))
         if type(select_option) == int:
-            Select(driver.find_element_by_id(select_id)).select_by_value(str(select_option))
+            Select(webelement.find_element_by_id(select_id)).select_by_value(str(select_option))
 
-    def select_option_byxpath(self, select_id, select_option):
-        driver = self.driver
+    def select_option_byxpath(self, webelement, select_id, select_option):
         if type(select_option) == str:
-            Select(driver.find_element_by_xpath(select_id)).select_by_visible_text(str(select_option))
+            Select(webelement.find_element_by_xpath(select_id)).select_by_visible_text(str(select_option))
         if type(select_option) == int:
-            Select(driver.find_element_by_xpath(select_id)).select_by_value(str(select_option))
+            Select(webelement.find_element_by_xpath(select_id)).select_by_value(str(select_option))
 
 
 

@@ -1,14 +1,15 @@
 __author__ = 'StefanFlorescu'
 
 import unittest
-
 from Automatisation.ReportsPage import StatReports
+from Automatisation.users import User
 
 
 class ReportTests(unittest.TestCase):
 
     def setUp(self):
-        pass
+        global user
+        user = User("sandbox", "Draytus", "manager")
 
     def test_should_generate_all_MI_Reports(self):
         reports = StatReports()
