@@ -6,7 +6,7 @@ __author__ = 'StefanFlorescu'
 class ApplicationPage(BasePage):
     def create_app(self):
         self.driver.find_element_by_partial_link_text("Tenancy Application").click()
-        self.wait(1)
+        self.wait()
         self.driver.find_element_by_link_text("Create Application").click()
         self.wait(3)
 
