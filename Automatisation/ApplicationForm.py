@@ -1,6 +1,10 @@
-from Automatisation.BasePage import BasePage
+import Automatisation
 
 __author__ = 'StefanFlorescu'
+from Automatisation.BasePage import BasePage
+from Automatisation.Incomes import income_pool
+
+
 
 class ApplicationForm(BasePage):
 
@@ -15,28 +19,46 @@ class ApplicationForm(BasePage):
                                       marital_status="Single"):
         driver = self.driver
         driver.find_element_by_link_text("Application Information").click()
-        self.select_option_byname("Title[]", title)
+        self.select_option_byname(driver, "Title[]", title)
         applicant_name = driver.find_element_by_name("FirstName[]")
         applicant_name.clear()
         applicant_name.send_keys(name)
         applicant_surename = driver.find_element_by_name("Surname[]")
         applicant_surename.clear()
         applicant_surename.send_keys(surename)
-        self.select_option_byname("Sex[]", sex)
-        self.set_date("DateOfBirth[]", birth_date)
-        self.select_option_byname("Nationality[]", nationality)
-        self.select_option_byname("MaritalStatus[]", marital_status)
-        self.select_option_byname("HasPreviousSurnames[]", "No")
-        self.select_option_byname("NumberOfDependants[]", 2)
+        self.select_option_byname(driver, "Sex[]", sex)
+        self.set_date(driver, "DateOfBirth[]", birth_date)
+        self.select_option_byname(driver, "Nationality[]", nationality)
+        self.select_option_byname(driver, "MaritalStatus[]", marital_status)
+        self.select_option_byname(driver, "HasPreviousSurnames[]", "No")
+        self.select_option_byname(driver, "NumberOfDependants[]", 2)
         driver.find_element_by_name("Email[]").send_keys(self.set_email())
-        self.select_option_byname("HasNationalInsuranceNumber[]", "No")
-        self.select_option_byname("HasUKDrivingLicense[]", "No")
-        self.select_option_byname("HasUKPassportNumber[]", "No")
-        self.select_option_byname("HasAdverseData[]", "No")
+        self.select_option_byname(driver, "HasNationalInsuranceNumber[]", "No")
+        self.select_option_byname(driver, "HasUKDrivingLicense[]", "No")
+        self.select_option_byname(driver, "HasUKPassportNumber[]", "No")
+        self.select_option_byname(driver, "HasAdverseData[]", "No")
 
-    def set_maininc(self):
+    def set_maininc(self, income_objetc):
         self.driver.find_element_by_link_text("Application Information").click()
-        self.select_option_byname("main_income_type", "Homemaker")
+        self.select_option_byname(self.driver, "main_income_type", income_objetc.name)
+        driver = self.wait_element(20, "//div[@id='d-sections']/div[@class='column-group']")
+        print("the webelement has been identified at "+str(id(driver)))
+        print(type(driver))
+        fields = income_objetc.data
+        for element in fields:
+            selector= fields[element][0]
+            if selector == "input":
+                input = driver.find_element_by_xpath('//input[starts-with(@name,\"{0}\")]'.format(fields[element][1]))
+                input.send_keys(str(fields[element][2]))
+            if selector== "select":
+                self.select_option_byxpath(driver, '//select[starts-with(@name,\"{0}\")]'.format(fields[element][1]), str(fields[element][2]))
+            if selector== "date":
+                self.set_date(driver, fields[element][1], fields[element][2])
+            if selector== "postcode":
+                self.set_randomaddress(fields[element][1])
+
+
+
         self.wait()
 
     def set_addinc(self, incomes = 2):
@@ -84,25 +106,13 @@ class ApplicationForm(BasePage):
         self.driver.find_element_by_link_text("Additional Information").click()
         self.select_option_byname("WillThereBeAnyPets", "No")
         self.select_option_byname("WillAnyOfTenantsSmoke", "No")
-        child_count = self.random_int(0, 7)
+        child_count = self.random_int(0, 3)
         self.select_option_byname("ChildrenCount", child_count)
         if child_count > 0:
             for i in xrange(1, child_count+1):
                 driver = self.driver.find_element_by_xpath('//div[@class="child"][{0}]'.format(i))
                 driver.find_element_by_name("children-FirstName[]").send_keys("Test_child_{0}".format(i))
                 driver.find_element_by_name("children-Surname[]").send_keys("Test_surename")
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -11,7 +11,7 @@ import random
 
 
 class BasePage(object):
-    def __init__(self, instance_url= 'https://sandbox.letrisks-acumen.com'):
+    def __init__(self, instance_url= 'http://homespuntesting.lan'):
         self.driver = webdriver.Firefox()
         self.base_url = instance_url
         self.driver.implicitly_wait(5)
@@ -24,39 +24,17 @@ class BasePage(object):
             self.postcode = "BA133BN"
 
 
+
     def go(self, link='/?request=restart'):
         self.driver.get(self.base_url + link)
 
-    def login(self, user="testinginbox@yahoo.com", password=123456):
+    def login(self, user_object):
+        self.go()
         self.driver.find_element_by_id("text-password").clear()
-        self.driver.find_element_by_id("text-password").send_keys(user)
+        self.driver.find_element_by_id("text-password").send_keys(user_object.username)
         self.driver.find_element_by_name("password").clear()
-        self.driver.find_element_by_name("password").send_keys(str(password))
+        self.driver.find_element_by_name("password").send_keys(str(user_object.password))
         self.driver.find_element_by_name("loginbutton").click()
-
-    def ag_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
-
-    def mg_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
-
-    def op_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
-
-    def admin_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
-
-    def branch_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
-
-    def area_login(self, sys_user):
-        self.go()
-        self.login(sys_user.username, sys_user.password)
 
     def logout(self):
         self.driver.find_element_by_partial_link_text("Account").click()
@@ -106,11 +84,11 @@ class BasePage(object):
 
 
     def set_randomaddress(self, postcode_name="PostCode"):
-        address = self.driver
-        address.find_element_by_name(postcode_name).clear()
-        address.find_element_by_name(postcode_name).send_keys(self.postcode + Keys.TAB + Keys.ENTER)
-        address_list = address.find_elements_by_class_name("address_item")
-        address_list[self.random_int(0, address_list.__len__() - 1)].click()
+        address = self.driver.find_element_by_xpath("//input[contains(@name,\"{}\")]".format(postcode_name))
+        address.clear()
+        address.send_keys(self.postcode + Keys.TAB + Keys.ENTER)
+        address_list = self.driver.find_elements_by_class_name("address_item")
+        address_list[random.randint(0, address_list.__len__() - 1)].click()
 
     def set_address(self, postcode_field_name, address_string):
         address = self.driver
@@ -129,14 +107,14 @@ class BasePage(object):
         self.set_date(webelement, locator, self.end_date)
 
     def set_date(self, webelement, locator_name, date_string):
-        webelement.find_element_by_name(locator_name).click()
+        webelement.find_element_by_xpath('//input[contains(@name,\"{0}\")]'.format(locator_name)).click()
         date_pool = date_string.split("/")
         day = self.format_date(date_pool[0])
         month = self.format_date(date_pool[1])
         year = self.format_date(date_pool[2])
-        self.select_option_byxpath(
+        self.select_option_byxpath(webelement,
             '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-month"]', int(month)-1)
-        self.select_option_byxpath(
+        self.select_option_byxpath(webelement,
             '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-year"]', year)
         datepicker = self.driver.find_element_by_xpath('//table[@class="ui-datepicker-calendar"]/tbody')
         datepicker.find_element_by_link_text(str(day)).click()

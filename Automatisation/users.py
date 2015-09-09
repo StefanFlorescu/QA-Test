@@ -12,10 +12,10 @@ user_pool = dict(
 
     sandbox=dict(
         url="http://sandbox.letrisks-acumen.com",
-        Letrisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "4cEfruzacr"],
+        Letrisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "4cEfruzacr", "LetRisks"],
                       area_manager=[],
                       branch_manager=[],
-                      agent=["QA Test", "testinginbox@yahoo.com", "123456"],
+                      agent=["QA Test", "testinginbox@yahoo.com", "123456", "LetRisks"],
                       operator=[]),
         Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
                      area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
@@ -29,19 +29,19 @@ user_pool = dict(
 
     preprod= dict(
         url="http://homespun.pre-prod.net",
-        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
-                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
-                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456"],
-                 agent=["Draytus Test", "testinginbox@gmail.com", "123456"],
-                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456"])),
+        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456", "et-1"],
+                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "et-1"],
+                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "et-1"],
+                 agent=["Draytus Test", "testinginbox@gmail.com", "123456", "et-1"],
+                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456", "et-1"])),
 
     testing = dict(
         url="http://homespuntesting.lan",
-        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
-                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
-                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456"],
-                 agent=["Draytus Test", "testinginbox@gmail.com", "123456"],
-                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456"]))
+        Draytus=dict(manager=["QA Draytus", "lr_manager@letrisks-acumen.com", "lr_manager", "et-1"],
+                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "et-1"],
+                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "et-1"],
+                 agent=["Draytus Test", "testinginbox@yahoo.com", "123456", "et-1"],
+                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456", "et-1"]))
 )
 
 
@@ -72,7 +72,7 @@ class User(object):
     def reporter_name(self):
         return self.user[0]
 
-    def set_branch(self, branch):
-        self.branch = branch
+    def branch(self, branch):
+        return self.user[3]
 
 

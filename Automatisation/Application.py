@@ -6,7 +6,7 @@ class Application (object):
     def __init__(self):
         self.rental_amount = 2000
         self.tenancy_term = 12
-        self.tenancy_start = "31/08/2015"
+        self.tenancy_start = "31/10/2015"
         self.tency_adddress = ""
         self.address_postcode = "BA133bn"
         self.address_house_nr = ""

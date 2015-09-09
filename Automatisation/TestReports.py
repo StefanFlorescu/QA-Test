@@ -8,13 +8,17 @@ from Automatisation.users import User
 class ReportTests(unittest.TestCase):
 
     def setUp(self):
-        global manager, agent, operator
+        global manager, agent, operator, area_manager, branch_manager
         manager = User("testing", "Draytus", "manager")
+        agent = User("testing", "Draytus", "agent")
+        operator = User("testing", "Draytus", "operator")
+        area_manager = User("testing", "Draytus", "area_manager")
+        branch_manager = User("testing", "Draytus", "branch_manager")
 
 
     def test_should_generate_all_MI_Reports(self):
         reports = StatReports()
-        reports.mg_login(manager)
+        reports.login(manager)
 
         reports.make_referencedirectory()
         reports.make_csvreport()
@@ -45,27 +49,23 @@ class ReportTests(unittest.TestCase):
 
     def test_users_login(self):
         user = StatReports()
-        user.ag_login()
+        user.login(manager)
         user.access_profile()
         user.logout()
 
-        user.op_login()
+        user.login(agent)
         user.access_profile()
         user.logout()
 
-        user.mg_login()
+        user.login(operator)
         user.access_profile()
         user.logout()
 
-        user.admin_login()
+        user.login(area_manager)
         user.access_profile()
         user.logout()
 
-        user.branch_login()
-        user.access_profile()
-        user.logout()
-
-        user.area_login()
+        user.login(branch_manager)
         user.access_profile()
         user.logout()
 
