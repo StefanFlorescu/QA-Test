@@ -38,13 +38,16 @@ class ApplicationForm(BasePage):
         self.select_option_byname(driver, "HasUKPassportNumber[]", "No")
         self.select_option_byname(driver, "HasAdverseData[]", "No")
 
-    def set_maininc(self, income_objetc):
-        self.driver.find_element_by_link_text("Application Information").click()
-        self.select_option_byname(self.driver, "main_income_type", income_objetc.name)
+    def set_maininc(self, income_object):
+        self.driver.find_element_by_link_text("Income Details").click()
+        self.select_option_byname(self.driver, "main_income_type", income_object.name)
         driver = self.wait_element(20, "//div[@id='d-sections']/div[@class='column-group']")
         print("the webelement has been identified at "+str(id(driver)))
         print(type(driver))
-        fields = income_objetc.data
+        self.complete_fields(driver, income_object.data)
+
+    def complete_fields(self, driver, income_dict):
+        fields = income_dict
         for element in fields:
             selector= fields[element][0]
             if selector == "input":

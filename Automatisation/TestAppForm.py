@@ -10,7 +10,7 @@ class ApplicationFormTest(unittest.TestCase):
     def setUp(self):
         global agent, main_income
         agent = User("testing", "Draytus", "agent")
-        main_income = Income(1)
+        main_income = Income(2)
 
     def test_1_getapplication(self):
         application = ApplicationForm()
