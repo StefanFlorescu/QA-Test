@@ -11,10 +11,10 @@ import random
 
 
 class BasePage(object):
-    def __init__(self, instance_url= 'http://homespuntesting.lan'):
+    def __init__(self, instance_url= 'http://sandbox.letrisks-acumen.com'):
         self.driver = webdriver.Firefox()
         self.base_url = instance_url
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(30)
         self.driver.maximize_window()
         self.start_date = "01/08/2015"
         self.end_date = time.strftime("%d/%m/%Y")
@@ -54,9 +54,9 @@ class BasePage(object):
         driver = self.driver
         driver.find_element_by_id(id_attribute).click()
 
-    def click_button_byxath(self, attribute="build"):
+    def click_button_byxath(self, attribute="build", value="True"):
         driver = self.driver
-        driver.find_element_by_xpath(attribute).click()
+        driver.find_element_by_xpath('//input[@\"{0}\"=\"{1}\"]'.format(str(attribute), str(value))).click()
 
 
 
@@ -116,7 +116,7 @@ class BasePage(object):
             '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-month"]', int(month)-1)
         self.select_option_byxpath(webelement,
             '//div[@id="ui-datepicker-div"]/descendant::select[@class="ui-datepicker-year"]', year)
-        datepicker = self.driver.find_element_by_xpath('//table[@class="ui-datepicker-calendar"]/tbody')
+        datepicker = webelement.find_element_by_xpath('//table[@class="ui-datepicker-calendar"]/tbody')
         datepicker.find_element_by_link_text(str(day)).click()
 
 

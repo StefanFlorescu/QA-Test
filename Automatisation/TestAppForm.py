@@ -15,7 +15,7 @@ class ApplicationFormTest(unittest.TestCase):
     def test_1_getapplication(self):
         application = ApplicationForm()
         application.login(agent)
-        application.go(link = "//application/ShowUpdateApplicant/?apid=555&agid=1421&a_id=1437&open=555")
+        application.go(link = "/application/ShowUpdateApplicant/?apid=2257&agid=419&a_id=3890&open=2257")
         application.set_applicat_personal_details()
         application.set_maininc(main_income)
         application.set_addinc(1)
