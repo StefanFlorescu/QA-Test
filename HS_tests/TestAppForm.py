@@ -2,15 +2,15 @@ __author__ = 'StefanFlorescu'
 
 import unittest
 from Automatisation.ApplicationForm import ApplicationForm
-from Automatisation.Incomes import Income
-from Automatisation.users import User
+from Automatisation.Income import Income
+from Automatisation.User import User
 
 class ApplicationFormTest(unittest.TestCase):
 
     def setUp(self):
         global agent, main_income
         agent = User("testing", "Draytus", "agent")
-        main_income = Income(2)
+        main_income = Income(1)
 
     def test_1_getapplication(self):
         application = ApplicationForm()

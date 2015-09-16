@@ -3,14 +3,14 @@
 __author__ = 'StefanFlorescu'
 
 from Automatisation.ApplicationPage import ApplicationPage
-from Automatisation import applicants
-from Automatisation import users
+from Automatisation import Applicant
+from Automatisation import User
 from Automatisation.Application import Application
 import unittest
 
-user = users.User(instance="homespun")
+user = User.User(instance="homespun")
 application = Application()
-applicant_list = [applicants.Applicant() for i in range(3)]
+applicant_list = [Applicant.Applicant() for i in range(3)]
 
 
 class ApplicationGroupTests(unittest.TestCase):

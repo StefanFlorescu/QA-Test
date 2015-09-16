@@ -1,5 +1,4 @@
 __author__ = 'StefanFlorescu'
-import random
 
 class Application (object):
 

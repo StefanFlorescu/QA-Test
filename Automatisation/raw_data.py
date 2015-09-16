@@ -1,6 +1,93 @@
 __author__ = 'StefanFlorescu'
 
-mass = [
+
+from collections import OrderedDict
+
+
+income_pool = {
+    1: dict(type1=True, type2=False, name="Temporary/Contract Work",
+            data=OrderedDict([("proof", ["select", "ContractDeliveryMethod", "Email"]),
+                              ("employment", ["select", "employment_likely_to_change", "No"]),
+                              ("employment_start", ["date", "EmploymentStartDate", "01/01/2015"]),
+                              ("job_title", ["input", "JobTitle", "QA Manager"]),
+                              ("company", ["input", "EmployersCompanyName", "Draytus"]),
+                              ("referee_name", ["input", "RefereeName", "MainIncome EmployerTest Name"]),
+                              ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                              ("referee_number", ["input", "RefereeBusinessLandlineNumber", "3256458498"]),
+                              ("referee_email", ["input","RefereeEmailAddress", "testinginbox11@draytus.net"]),
+                              ("months_remained", ["select", "months_remaining", 36])])),
+
+    2: dict(type1=True, type2=False, name="Part Time Employed",
+            data=OrderedDict([("proof", ["select", "ContractDeliveryMethod", "Email"]),
+                              ("employment", ["select", "employment_likely_to_change", "No"]),
+                              ("employment_start", ["date", "EmploymentStartDate", "01/01/2015"]),
+                              ("job_title", ["input", "JobTitle", "QA Manager"]),
+                              ("company", ["input", "EmployersCompanyName", "Draytus"]),
+                              ("referee_name", ["input", "RefereeName", "MainIncome EmployerTest Name"]),
+                              ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                              ("referee_number", ["input", "RefereeBusinessLandlineNumber", "3256458498"]),
+                              ("referee_email", ["input","RefereeEmailAddress", "testinginbox12@draytus.net"])])),
+
+    3: dict(type1=True, type2=True, name="Full time Employed",
+            data=OrderedDict([("proof", ["select", "ContractDeliveryMethod", "Email"]),
+                              ("employment",["select", "employment_likely_to_change", "No"]),
+                               ("employment_start", ["date", "EmploymentStartDate", "01/01/2015"]),
+                              ("job_title", ["input", "JobTitle", "QA Manager"]),
+                               ("company", ["input", "EmployersCompanyName", "Draytus"]),
+                              ("referee_name", ["input", "RefereeName", "MainIncome EmployerTest Name"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                              ("referee_number", ["input", "RefereeBusinessLandlineNumber", "3256458498"]),
+                               ("referee_email", ["input","RefereeEmailAddress", "testinginbox13@draytus.net"])])),
+
+    4: dict(type1=True, type2=False, name="Self-Employed",
+            data= OrderedDict([("employed_time", ["select", "SelfEmployedPeriod", 3]),
+                               ("have_accountant", ["select", "DoYouHaveAnAccountant", "Yes"]),
+                               ("firm_name", ["input", "AccountancyFirmName", "Test Accountancy Firm"]),
+                               ("referee_name", ["input", "RefereeName", "MainIncome Self-employment Accountancy"]),
+                               ("referee_job", ["input", "RefereeJobTitle", "QA Manager"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                               ("referee_number", ["input", "RefereeBusinessLandlineNumber", "78784654761"]),
+                               ("referee_email", ["input", "RefereeEmailAddress", "testinginbox14@draytus.net"])])),
+
+    5: dict(type1=True, type2=True, name = "Retired",
+            data= OrderedDict([("have_proof", ["select", "DoYouHaveProofOfPension", "No"]),
+                               ("pension_provider", ["input", "PensionProviderName", "UK National Pension Fund"]),
+                               ("referee_name", ["input", "RefereeName", "MainIncome PensionTest"]),
+                               ("referee_job", ["input", "RefereeJobTitle", "Social Assistant"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                               ("referee_phone", ["input", "RefereeBusinessLandlineNumber", "879567831358"]),
+                               ("referee_email", ["input", "RefereeEmailAddress", "testinginbox15@draytus.net"])])),
+
+    6: dict(type1=True, type2=True, name="Student sponsorship/funding",
+            data= OrderedDict([("delivery_method", ["select", "DocumentDeliveryMethod", "Email"]),
+                               ("funding_organisation", ["input", "OrganisationName", "Oxford on Maine"]),
+                               ("referee_name", ["input", "RefereeName", "MainIncome StudentTest"]),
+                               ("referee_job", ["input", "RefereeJobTitle", "Student Affairs manager"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                               ("referee_phone", ["input", "RefereeBusinessLandlineNumber", "879007831358"]),
+                               ("referee_email", ["input", "RefereeEmailAddress", "testinginbox16@draytus.net"])])),
+
+    7: dict(type1=True, type2=True, name="Private Income",
+            data= OrderedDict([("who_toprovide", ["select", "ReferenceProvider", "Solicitor"]),
+                               ("referee_business", ["input", "RefereeBusinessName", "Test Referee Business Name"]),
+                               ("referee_name", ["input", "RefereeName", "MainIncome PrivateIncome"]),
+                               ("referee_job", ["input", "RefereeJobTitle", "General Manager"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                               ("referee_phone", ["input", "RefereeBusinessLandlineNumber", "899307831358"]),
+                               ("referee_email", ["input", "RefereeEmailAddress", "testinginbox17@draytus.net"])])),
+
+    7: dict(type1=True, type2=True, name="Foster Carer Income",
+            data= OrderedDict([("who_toprovide", ["select", "ReferenceProvider", "Agency"]),
+                               ("referee_business", ["input", "RefereeBusinessName", "Test Referee Business Name"]),
+                               ("referee_name", ["input", "RefereeName", "MainIncome FosterIncome Test"]),
+                               ("referee_job", ["input", "RefereeJobTitle", "Financial Manager"]),
+                               ("referee_address", ["postcode", "PostCode", "ba133bn"]),
+                               ("referee_phone", ["input", "RefereeBusinessLandlineNumber", "899307831358"]),
+                               ("referee_email", ["input", "RefereeEmailAddress", "testinginbox17@draytus.net"])]))
+}
+
+
+applicants_pool = [
     {"name": ['RAYMOND ', 'SMITH ', '01/11/1945'], "address": ['3 ', '', ''], "bank": ['56-00-36', '57607230'],
      "details": ["Mr", "Male", "British", "Married"], "ccj": False, "phone": True},
     {"name": ['ROGER ', 'HAYNE ', '01/11/1951'], "address": ['5 ', '', ''], "bank": ['56-00-36', '57607230'],
@@ -132,78 +219,48 @@ mass = [
      "bank": ['56-00-36', '57607230'], "details": ["Mr", "Male", "British", "Married"], "ccj": False, "phone": False}
 ]
 
-import random
 
 
-class Applicant(object):
-    def __init__(self, ccj_value=False, phone_value=False, report="Comprehensive", hasemail=True,
-                 incomeverification=True, payinadvance=True):
+user_pool = dict(
 
-        def user_index():
-            """ func that returns the index of the object that meets the initializator variable values(requirements)
-            :return: int
-            """
-            index = 0
-            while True:
-                index = random.randint(0, (mass.__len__() - 1))
-                if mass[index]["ccj"] == ccj_value and mass[index]["phone"] == phone_value:
-                    break
-            return mass[index]
+    production=dict(
+        url="letrisks-acumen.com",
+        LetRisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "lr_manager", "None"],
+                      area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "None"],
+                      branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "None"],
+                      agent=["QA test", "testinginbox@yahoo.com", "123456", "None"],
+                      operator=["Draytus Operator", "testingsitesqa@hotmail.com", "123456", "None"])),
 
-        self.selector = user_index()
-        self.report_type = report
-        self.payinginadvance = payinadvance
-        self.hasemail = hasemail
-        self.incomeverification_required = incomeverification
-        self.rentshare = 1000
+    sandbox=dict(
+        url="http://sandbox.letrisks-acumen.com",
+        Letrisks=dict(manager=["Letrisks", "lr_manager@letrisks-acumen.com", "4cEfruzacr", "LetRisks"],
+                      area_manager=[],
+                      branch_manager=[],
+                      agent=["QA Test", "testinginbox@yahoo.com", "123456", "LetRisks"],
+                      operator=[]),
+        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456"],
+                     area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456"],
+                     branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456"],
+                     agent=["Draytus Test", "testinginbox@gmail.com", "123456"],
+                     operator=["QA Operator", "testingsitesqa@hotmail.com", "123456"]),
+        API_Customer=dict(manager=[], area_manager=[],
+                          branch_manager=[],
+                          agent=["QA API Test", "testinginbox@yahoo.com", "123456"],
+                          operator=[])),
 
-    def set_report_type(self, value):
-        self.report_type = value
+    preprod= dict(
+        url="http://homespun.pre-prod.net",
+        Draytus=dict(manager=["QA Draytus", "draytus_manager@letrisks-acumen.com", "123456", "et-1"],
+                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "et-1"],
+                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "et-1"],
+                 agent=["Draytus Test", "testinginbox@gmail.com", "123456", "et-1"],
+                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456", "et-1"])),
 
-    @property
-    def name(self):
-        return self.selector["name"][0]
-
-    @property
-    def surename(self):
-        return self.selector["name"][1]
-
-    @property
-    def birthdate(self):
-        return self.selector["name"][2]
-
-    @property
-    def current_address(self):
-        return self.selector["address"][0]
-
-    @property
-    def previous_address(self):
-        return self.selector["address"][1]
-
-    @property
-    def second_previous_address(self):
-        return self.selector["address"][2]
-
-    @property
-    def sort_code(self):
-        return self.selector["bank"][0]
-
-    @property
-    def account_number(self):
-        return self.selector['bank'][1]
-
-    @property
-    def applicant_title(self):
-        return self.selector["details"][0]
-
-    @property
-    def sex(self):
-        return self.selector["details"][1]
-
-    @property
-    def origin(self):
-        return self.selector["details"][2]
-
-    @property
-    def status(self):
-        return self.selector["details"][3]
+    testing = dict(
+        url="http://homespuntesting.lan",
+        Draytus=dict(manager=["QA Draytus", "lr_manager@letrisks-acumen.com", "lr_manager", "et-1"],
+                 area_manager=["QA Area Manager", "testingsitesqa@yandex.com", "123456", "et-1"],
+                 branch_manager=["QA Branch Manager", "testingsitesqa@outlook.com", "123456", "et-1"],
+                 agent=["Draytus Test", "testinginbox@yahoo.com", "123456", "et-1"],
+                 operator=["QA Operator", "testingsitesqa@hotmail.com", "123456", "et-1"]))
+)

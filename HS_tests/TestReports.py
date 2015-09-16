@@ -2,7 +2,7 @@ __author__ = 'StefanFlorescu'
 
 import unittest
 from Automatisation.ReportsPage import StatReports
-from Automatisation.users import User
+from Automatisation.User import User
 
 
 class ReportTests(unittest.TestCase):

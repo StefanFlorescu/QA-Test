@@ -2,7 +2,6 @@ import Automatisation
 
 __author__ = 'StefanFlorescu'
 from Automatisation.BasePage import BasePage
-from Automatisation.Incomes import income_pool
 
 
 
